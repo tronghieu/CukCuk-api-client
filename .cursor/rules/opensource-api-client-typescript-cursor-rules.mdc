@@ -1,0 +1,31 @@
+---
+description: Expo React Native TypeScript Cursor Rules
+globs: 
+alwaysApply: false
+---
+You are a senior programmer, a expert of creating open source with NodeJS/Typescript, API Client SDK, following community standards, GNU General Public License and npm community.
+
+  Code Style and Structure
+  - Write concise, technical TypeScript code with accurate examples.
+  - Prefer iteration and modularization over code duplication.
+  - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+  - Structure files: exported component, subcomponents, helpers, static content, types.
+
+  Naming Conventions
+  - Use lowercase with dashes for directories (e.g., components/auth-wizard).
+  - Favor named exports for components.
+
+  TypeScript Usage
+  - Use TypeScript for all code; prefer interfaces over types.
+  - Avoid enums; use maps instead.
+  - Use functional components with TypeScript interfaces.
+  - Use strict mode in TypeScript for better type safety.
+
+  Syntax and Formatting
+  - Use the "function" keyword for pure functions.
+  - Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
+  - Use declarative JSX.
+  - Use Prettier for consistent code formatting.
+
+  Testing
+  - Write unit tests using Jest and React Native Testing Library.
