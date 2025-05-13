@@ -4,10 +4,9 @@ import type {
   ApiResponse, 
   ApiError, 
   LoginRequest, 
-  LoginResponse,
-  Branch,
-  BranchListParams
+  LoginResponse
 } from '@/types';
+import { BranchesApi } from './branches';
 
 export class CukCukClient {
   private readonly client: AxiosInstance;
@@ -54,6 +53,12 @@ export class CukCukClient {
     }
   }
 
+  // Public method for making API requests
+  public async makeRequest<T>(config: AxiosRequestConfig): Promise<T> {
+    const response = await this.request<T>(config);
+    return response.data;
+  }
+
   // Account API
   public account = {
     login: async (params: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
@@ -77,13 +82,5 @@ export class CukCukClient {
   };
 
   // Branches API
-  public branches = {
-    getAll: async (params?: BranchListParams): Promise<ApiResponse<Branch[]>> => {
-      return this.request<Branch[]>({
-        method: 'GET',
-        url: '/api/v1/branches',
-        params,
-      });
-    },
-  };
+  public branches = new BranchesApi(this);
 } 

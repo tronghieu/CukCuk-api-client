@@ -33,14 +33,50 @@ export interface LoginResponse {
 }
 
 export interface Branch {
-  id: string;
-  name: string;
-  code: string;
-  address?: string;
-  phone?: string;
-  isActive: boolean;
+  Id: string;
+  Code: string;
+  Name: string;
+  IsBaseDepot: boolean;
+  IsChainBranch: boolean;
 }
 
-export interface BranchListParams {
+export interface BranchSetting extends Branch {
+  HasVATRate: boolean;
+  VATRate: number;
+  VATForDelivery: boolean;
+  VATForTakeAway: boolean;
+  VATForShip: boolean;
+  CalTaxForService: boolean;
+  HasCalcService: boolean;
+  CalcServiceDelivery: boolean;
+  CalcServiceTakeAway: boolean;
+  IsCalcServiceAmountNotPromotion: boolean;
+  HasCalcServiceWhenRequire: boolean;
+  HasServiceRate: boolean;
+  ServiceRate: number;
+  HasAmountService: boolean;
+  AmountService: number;
+  Inactive: boolean;
+}
+
+export interface GetAllBranchesParams {
   includeInactive?: boolean;
+}
+
+export interface GetAllBranchesResponse {
+  Code: number;
+  Data: Branch[];
+  Total: number;
+  Success: boolean;
+  ErrorType: number;
+  ErrorMessage: string | null;
+}
+
+export interface GetBranchSettingResponse {
+  Code: number;
+  Data: BranchSetting;
+  Total: number;
+  Success: boolean;
+  ErrorType: number;
+  ErrorMessage: string | null;
 } 
