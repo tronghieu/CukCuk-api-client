@@ -21,15 +21,17 @@ export interface ApiError {
 }
 
 export interface LoginRequest {
-  domain: string;
-  appId: string;
-  loginTime: string;
+  Domain: string;
+  AppId: string;
+  LoginTime?: string;
 }
 
 export interface LoginResponse {
-  accessToken: string;
-  refreshToken: string;
-  expiresIn: number;
+  AppId: string;
+  Domain: string;
+  AccessToken: string;
+  CompanyCode: string;
+  Environment: number;
 }
 
 export interface Branch {

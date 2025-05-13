@@ -11,9 +11,9 @@ export class BranchesApi {
    */
   async getAll(params?: GetAllBranchesParams): Promise<GetAllBranchesResponse> {
     return this.client.makeRequest<GetAllBranchesResponse>({
-      method: 'POST',
+      method: 'GET',
       url: 'api/v1/branchs/all',
-      data: params
+      params
     });
   }
 
