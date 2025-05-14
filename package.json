@@ -1,6 +1,6 @@
 {
   "name": "CukCuk-node-api-client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "NodeJS/TypeScript API client for CukCuk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
