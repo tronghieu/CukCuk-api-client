@@ -259,4 +259,31 @@ export interface GetCustomersPagingParams {
   LastSyncDate?: string;
 }
 
-export interface GetCustomersPagingResponse extends ServiceResult<Customer[]> {} 
+export interface GetCustomersPagingResponse extends ServiceResult<Customer[]> {}
+
+// Employee Types
+export interface Employee {
+  Id: string;
+  BranchId: string;
+  Code: string;
+  FirstName: string;
+  LastName: string;
+  FullName: string;
+  Gender: number;
+  Mobile: string;
+  HomeTel: string;
+  Email: string;
+  IdentifyNumber: string;
+  CurrentAddress: string;
+  NativeAddress: string;
+  RoleCode: string;
+}
+
+export interface GetEmployeesPagingParams {
+  Page: number;
+  Limit: number;
+  BranchId?: string;
+  LastSyncDate?: string;
+}
+
+export interface GetEmployeesPagingResponse extends ServiceResult<Employee[]> {} 
