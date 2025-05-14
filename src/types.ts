@@ -190,4 +190,28 @@ export interface UpdateOrderItemsResponse {
   Data: Order;
   Total: number;
   Success: boolean;
+}
+
+// Categories Types
+export interface InventoryItemCategory {
+  Id: string;
+  Code: string;
+  Name: string;
+  Description: string;
+  Inactive: boolean;
+  IsLeaf: boolean;
+  Grade: number;
+}
+
+export interface GetCategoriesListParams {
+  includeInactive?: boolean;
+}
+
+export interface GetCategoriesListResponse {
+  Code: number;
+  Data: InventoryItemCategory[];
+  Total: number;
+  Success: boolean;
+  ErrorType: number;
+  ErrorMessage: string | null;
 } 

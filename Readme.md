@@ -47,9 +47,9 @@ async function main() {
   try {
     // Authenticate and obtain access token
     const loginResponse = await client.account.login({
-      domain: "your-domain",
-      appId: "your-app-id",
-      loginTime: new Date().toISOString(),
+      Domain: "your-domain",
+      AppId: "your-app-id",
+      LoginTime: new Date().toISOString(),
     });
 
     // Fetch all branches
@@ -68,6 +68,7 @@ main();
 Detailed guides for connecting to each API endpoint are available in the [docs](./docs) directory:
 
 - [Branches API](./docs/branches-api.md)
+- [Categories API](./docs/categories-api.md)
 - [Orders API](./docs/orders-api.md)
 
 Refer to these guides for endpoint-specific parameters, response formats, and error handling.

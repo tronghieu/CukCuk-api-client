@@ -38,9 +38,9 @@ describe('BranchesApi', () => {
       const result = await branchesApi.getAll();
 
       expect(mockClient.makeRequest).toHaveBeenCalledWith({
-        method: 'POST',
+        method: 'GET',
         url: 'api/v1/branchs/all',
-        data: undefined,
+        params: undefined,
       });
       expect(result).toEqual(mockResponse);
     });
@@ -68,9 +68,9 @@ describe('BranchesApi', () => {
       const result = await branchesApi.getAll({ includeInactive: true });
 
       expect(mockClient.makeRequest).toHaveBeenCalledWith({
-        method: 'POST',
+        method: 'GET',
         url: 'api/v1/branchs/all',
-        data: { includeInactive: true },
+        params: { includeInactive: true },
       });
       expect(result).toEqual(mockResponse);
     });

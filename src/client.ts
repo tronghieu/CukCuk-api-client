@@ -7,6 +7,7 @@ import type {
   LoginResponse
 } from '@/types';
 import { BranchesApi } from './branches';
+import { CategoriesApi } from './categories';
 import * as crypto from 'crypto';
 import { OrdersApi } from './orders';
 
@@ -98,6 +99,9 @@ export class CukCukClient {
 
   // Branches API
   public branches = new BranchesApi(this);
+
+  // Categories API
+  public categories = new CategoriesApi(this);
 
   public orders = new OrdersApi(this);
 } 
