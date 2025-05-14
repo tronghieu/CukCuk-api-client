@@ -44,10 +44,9 @@ export class CukCukClient {
 
   private generateSignature(params: LoginRequest): string {
     const jsonString = JSON.stringify({
-      AppId: params.AppId,
+      AppID: params.AppId,
       Domain: params.Domain,
-      LoginTime: params.LoginTime,
-      CompanyCode: this.config.companyCode
+      LoginTime: params.LoginTime
     });
     const hmac = crypto.createHmac('sha256', this.config.secretKey);
     return hmac.update(jsonString).digest('hex');
@@ -55,11 +54,8 @@ export class CukCukClient {
 
   protected async request<T>(config: AxiosRequestConfig): Promise<ApiResponse<T>> {
     try {
-      const response = await this.client.request<T>(config);
-      return {
-        data: response.data,
-        status: response.status,
-      };
+      const response = await this.client.request<ApiResponse<T>>(config);
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -68,7 +64,7 @@ export class CukCukClient {
   // Public method for making API requests
   public async makeRequest<T>(config: AxiosRequestConfig): Promise<T> {
     const response = await this.request<T>(config);
-    return response.data;
+    return response.Data;
   }
 
   // Account API
@@ -84,14 +80,13 @@ export class CukCukClient {
         data: {
           ...params,
           SignatureInfo,
-          secretKey: this.config.secretKey,
-          companyCode: this.config.companyCode,
+          secretKey: this.config.secretKey
         },
       });
 
-      if (response.data.AccessToken) {
-        this.accessToken = response.data.AccessToken;
-        this.config.companyCode = response.data.CompanyCode;
+      if (response.Data.AccessToken) {
+        this.accessToken = response.Data.AccessToken;
+        this.config.companyCode = response.Data.CompanyCode;
         this.client.defaults.headers.common['Authorization'] = `Bearer ${this.accessToken}`;
         this.client.defaults.headers.common['CompanyCode'] = this.config.companyCode;
       }

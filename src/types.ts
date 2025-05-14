@@ -9,9 +9,13 @@ export interface ClientConfig {
 }
 
 export interface ApiResponse<T> {
-  data: T;
-  status: number;
-  message?: string;
+  Code: number;
+  ErrorType?: number;
+  ErrorMessage?: string | null;
+  Success: boolean;
+  Evironment?: string;
+  Data: T;
+  Total: number;
 }
 
 export interface ApiError {
