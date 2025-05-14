@@ -85,4 +85,109 @@ export interface GetBranchSettingResponse {
   Success: boolean;
   ErrorType: number;
   ErrorMessage: string | null;
+}
+
+// Order Types
+export interface OrderDetail {
+  Id?: string;
+  ItemId: string;
+  ItemName?: string;
+  UnitId?: string;
+  UnitName?: string;
+  Quantity: number;
+  Status?: number;
+  Price?: number;
+  Amount?: number;
+  SortOrder?: number;
+  AdditionId?: string;
+  ParentId?: string;
+  Description?: string;
+}
+
+export interface Order {
+  Id: string;
+  Type: number;
+  No: string;
+  BranchId: string;
+  Status: number;
+  Date: string;
+  ShippingDate?: string;
+  CustomerId?: string;
+  CustomerName?: string;
+  CustomerTel?: string;
+  EmployeeId?: string;
+  EmployeeName?: string;
+  ShippingAddress?: string;
+  DeliveryAmount?: number;
+  DepositAmount?: number;
+  TotalAmount?: number;
+  TableName?: string;
+  OrderDetails: OrderDetail[];
+  ListTableID?: string[];
+  Version?: string;
+}
+
+// Orders Paging
+export interface GetOrdersPagingParams {
+  Page: number;
+  Limit: number;
+  BranchId?: string;
+  LastSyncDate?: string;
+}
+
+export interface GetOrdersPagingResponse {
+  Code: number;
+  Data: Order[];
+  Total: number;
+  Success: boolean;
+}
+
+// Create Order
+export interface CreateOrderParams {
+  Id?: string;
+  Type: number;
+  No?: string;
+  BranchId: string;
+  Date?: string;
+  ShippingDate?: string;
+  CustomerId?: string;
+  CustomerName?: string;
+  CustomerTel?: string;
+  EmployeeId?: string;
+  ShippingAddress?: string;
+  DeliveryAmount?: number;
+  DepositAmount?: number;
+  RequestDescription?: string;
+  OrderDetails: OrderDetail[];
+  ListTableID?: string[];
+  Version?: string;
+}
+
+export interface CreateOrderResponse {
+  Code: number;
+  Data: Order;
+  Total: number;
+  Success: boolean;
+}
+
+// Get Order Detail
+export interface GetOrderDetailResponse {
+  Code: number;
+  Data: Order;
+  Total: number;
+  Success: boolean;
+}
+
+// Update Order Items
+export interface UpdateOrderItemsParams {
+  Id: string;
+  BranchId: string;
+  OrderDetails: OrderDetail[];
+}
+
+export interface UpdateOrderItemsResponse {
+  Code: number;
+  Data: Order;
+  Total: number;
+  Success: boolean;
 } 
