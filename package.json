@@ -1,5 +1,5 @@
 {
-  "name": "CukCuk-node-api-client",
+  "name": "@luutronghieu/cukcuk-api-client",
   "version": "1.0.0",
   "description": "NodeJS/TypeScript API client for CukCuk",
   "main": "dist/index.js",
@@ -48,6 +48,7 @@
     "LICENSE"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
