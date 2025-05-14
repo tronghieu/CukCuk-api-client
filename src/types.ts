@@ -286,4 +286,47 @@ export interface GetEmployeesPagingParams {
   LastSyncDate?: string;
 }
 
-export interface GetEmployeesPagingResponse extends ServiceResult<Employee[]> {} 
+export interface GetEmployeesPagingResponse extends ServiceResult<Employee[]> {}
+
+// Inventory Items Types
+export interface InventoryItemAddition {
+  AdditionId: string;
+  Description: string;
+  Price: number;
+  InActive: boolean;
+}
+
+export interface InventoryItemAdditionCategory {
+  Additions: InventoryItemAddition[];
+}
+
+export interface InventoryItem {
+  Id: string;
+  Code: string;
+  Name: string;
+  ItemType: number;
+  CategoryID: string;
+  CategoryName: string;
+  Price: number;
+  Inactive: boolean;
+  UnitID: string;
+  UnitName: string;
+  Description: string;
+  IsSeftPrice: boolean;
+  AllowAdjustPrice: boolean;
+  Children?: InventoryItem[];
+  AdditionCategories?: InventoryItemAdditionCategory[];
+}
+
+export interface GetInventoryItemsPagingParams {
+  Page: number;
+  Limit: number;
+  BranchId?: string;
+  CategoryId?: string;
+  KeySearch?: string;
+  IncludeInactive?: boolean;
+}
+
+export interface GetInventoryItemsPagingResponse extends ServiceResult<InventoryItem[]> {}
+
+export interface GetInventoryItemDetailResponse extends ServiceResult<InventoryItem> {} 

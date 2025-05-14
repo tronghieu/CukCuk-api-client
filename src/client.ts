@@ -12,6 +12,8 @@ import * as crypto from 'crypto';
 import { OrdersApi } from './orders';
 import { CustomersApi } from './customers';
 import { EmployeesApi } from './employees';
+import { InventoryItemsApi } from './inventory-items';
+
 export class CukCukClient {
   private readonly client: AxiosInstance;
   private readonly config: ClientConfig;
@@ -112,4 +114,7 @@ export class CukCukClient {
 
   // Employees API
   public employees = new EmployeesApi(this);
+
+  // Inventory Items API
+  public inventoryItems = new InventoryItemsApi(this);
 } 
