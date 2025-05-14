@@ -1,7 +1,7 @@
 {
-  "name": "cukcuk-api-client",
+  "name": "CukCuk-node-api-client",
   "version": "0.1.0",
-  "description": "TypeScript API client for CukCuk",
+  "description": "NodeJS/TypeScript API client for CukCuk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,13 +11,23 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tronghieu/CukCuk-api-client.git"
+  },
   "keywords": [
+    "cukcuk",
     "api-client",
+    "restaurant-management",
     "typescript",
-    "cukcuk"
+    "nodejs"
   ],
-  "author": "",
+  "author": "Luu Trong Hieu <tronghieu.luu@gmail.com>",
   "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tronghieu/CukCuk-api-client/issues"
+  },
+  "homepage": "https://github.com/tronghieu/CukCuk-api-client#readme",
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.24",
@@ -36,5 +46,8 @@
     "dist",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
