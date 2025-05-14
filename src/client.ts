@@ -10,6 +10,7 @@ import { BranchesApi } from './branches';
 import { CategoriesApi } from './categories';
 import * as crypto from 'crypto';
 import { OrdersApi } from './orders';
+import { CustomersApi } from './customers';
 
 export class CukCukClient {
   private readonly client: AxiosInstance;
@@ -103,5 +104,9 @@ export class CukCukClient {
   // Categories API
   public categories = new CategoriesApi(this);
 
+  // Orders API
   public orders = new OrdersApi(this);
+
+  // Customers API
+  public customers = new CustomersApi(this);
 } 

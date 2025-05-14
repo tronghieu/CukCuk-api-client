@@ -214,4 +214,49 @@ export interface GetCategoriesListResponse {
   Success: boolean;
   ErrorType: number;
   ErrorMessage: string | null;
-} 
+}
+
+export interface ServiceResult<T> {
+  Code: number;
+  Data: T;
+  Total: number;
+  Success: boolean;
+  ErrorType?: number;
+  ErrorMessage?: string;
+  Environment?: string;
+}
+
+export interface Customer {
+  Id?: string;
+  BranchId?: string;
+  OriginalBranchId?: string;
+  Code?: string;
+  Name: string;
+  CustomerCategoryID?: string;
+  CustomerCategoryName?: string;
+  Tel: string;
+  Address?: string;
+  Email?: string;
+  Description?: string;
+  IdentifyNumber?: string;
+  Birthday?: string;
+  Inactive?: boolean;
+  OldNumberCard?: string;
+  CardStartDate?: string;
+  CardExpireDate?: string;
+  NormalizedTel?: string;
+  TotalAmount?: number;
+}
+
+export interface CreateCustomerParams extends Omit<Customer, 'Id' | 'NormalizedTel' | 'TotalAmount'> {}
+
+export interface CreateCustomerResponse extends ServiceResult<Customer[]> {}
+
+export interface GetCustomersPagingParams {
+  Page: number;
+  Limit: number;
+  IncludeInactive?: boolean;
+  LastSyncDate?: string;
+}
+
+export interface GetCustomersPagingResponse extends ServiceResult<Customer[]> {} 

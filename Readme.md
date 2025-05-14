@@ -69,6 +69,7 @@ Detailed guides for connecting to each API endpoint are available in the [docs](
 
 - [Branches API](./docs/branches-api.md)
 - [Categories API](./docs/categories-api.md)
+- [Categories API](./docs/customers-api.markdown)
 - [Orders API](./docs/orders-api.md)
 
 Refer to these guides for endpoint-specific parameters, response formats, and error handling.
