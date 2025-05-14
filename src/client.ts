@@ -4,10 +4,11 @@ import type {
   ApiResponse, 
   ApiError, 
   LoginRequest, 
-  LoginResponse,
-  Branch,
-  BranchListParams
+  LoginResponse
 } from '@/types';
+import { BranchesApi } from './branches';
+import * as crypto from 'crypto';
+import { OrdersApi } from './orders';
 
 export class CukCukClient {
   private readonly client: AxiosInstance;
@@ -42,34 +43,53 @@ export class CukCukClient {
     );
   }
 
+  private generateSignature(params: LoginRequest): string {
+    const jsonString = JSON.stringify({
+      AppID: params.AppId,
+      Domain: params.Domain,
+      LoginTime: params.LoginTime
+    });
+    const hmac = crypto.createHmac('sha256', this.config.secretKey);
+    return hmac.update(jsonString).digest('hex');
+  }
+
   protected async request<T>(config: AxiosRequestConfig): Promise<ApiResponse<T>> {
     try {
-      const response = await this.client.request<T>(config);
-      return {
-        data: response.data,
-        status: response.status,
-      };
+      const response = await this.client.request<ApiResponse<T>>(config);
+      return response.data;
     } catch (error) {
       throw error;
     }
   }
 
+  // Public method for making API requests
+  public async makeRequest<T>(config: AxiosRequestConfig): Promise<T> {
+    const response = await this.request<T>(config);
+    return response.Data;
+  }
+
   // Account API
   public account = {
     login: async (params: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
+      params.LoginTime = params.LoginTime ? params.LoginTime : new Date().toISOString();
+      this.config.appId = params.AppId;
+      this.config.domain = params.Domain;
+      const SignatureInfo = this.generateSignature(params);
       const response = await this.request<LoginResponse>({
         method: 'POST',
-        url: '/api/v1/account/login',
+        url: '/api/account/login',
         data: {
           ...params,
-          secretKey: this.config.secretKey,
-          companyCode: this.config.companyCode,
+          SignatureInfo,
+          secretKey: this.config.secretKey
         },
       });
-      
-      if (response.data.accessToken) {
-        this.accessToken = response.data.accessToken;
+
+      if (response.Data.AccessToken) {
+        this.accessToken = response.Data.AccessToken;
+        this.config.companyCode = response.Data.CompanyCode;
         this.client.defaults.headers.common['Authorization'] = `Bearer ${this.accessToken}`;
+        this.client.defaults.headers.common['CompanyCode'] = this.config.companyCode;
       }
       
       return response;
@@ -77,13 +97,7 @@ export class CukCukClient {
   };
 
   // Branches API
-  public branches = {
-    getAll: async (params?: BranchListParams): Promise<ApiResponse<Branch[]>> => {
-      return this.request<Branch[]>({
-        method: 'GET',
-        url: '/api/v1/branches',
-        params,
-      });
-    },
-  };
+  public branches = new BranchesApi(this);
+
+  public orders = new OrdersApi(this);
 } 

@@ -1,4 +1,3 @@
-
 # CukCuk API Client
 
 [![npm version](https://badge.fury.io/js/cukcuk-api-client.svg)](https://badge.fury.io/js/cukcuk-api-client)
@@ -38,29 +37,26 @@ Obtain your credentials from the [CukCuk management portal](https://cukcuk.vn) a
 Here's a basic example to authenticate and fetch branches using the CukCuk API client:
 
 ```typescript
-import { CukCukClient } from 'cukcuk-api-client';
+import { CukCukClient } from "cukcuk-api-client";
 
 const client = new CukCukClient({
-  appId: 'your-app-id',
-  domain: 'your-domain',
-  secretKey: 'your-secret-key',
-  companyCode: 'your-company-code',
+  secretKey: "your-secret-key",
 });
 
 async function main() {
   try {
     // Authenticate and obtain access token
     const loginResponse = await client.account.login({
-      domain: 'your-domain',
-      appId: 'your-app-id',
+      domain: "your-domain",
+      appId: "your-app-id",
       loginTime: new Date().toISOString(),
     });
 
     // Fetch all branches
     const branches = await client.branches.getAll({ includeInactive: true });
-    console.log('Branches:', branches);
+    console.log("Branches:", branches);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 
@@ -71,8 +67,8 @@ main();
 
 Detailed guides for connecting to each API endpoint are available in the [docs](./docs) directory:
 
-- [Account API Authentication](./docs/account-api.md)
 - [Branches API](./docs/branches-api.md)
+- [Orders API](./docs/orders-api.md)
 
 Refer to these guides for endpoint-specific parameters, response formats, and error handling.
 
@@ -100,4 +96,3 @@ For issues, feature requests, or questions, please open an issue on the [GitHub 
 
 - Built with ❤️ by the open-source community.
 - Thanks to CukCuk for providing the OpenPlatform API.
-

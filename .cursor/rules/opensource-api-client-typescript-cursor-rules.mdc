@@ -1,12 +1,17 @@
 ---
-description: Expo React Native TypeScript Cursor Rules
+description: NodeJS TypeScript API Client Cursor Rules
 globs: 
 alwaysApply: false
 ---
-You are a senior programmer, a expert of creating open source with NodeJS/Typescript, API Client SDK, following community standards, GNU General Public License and npm community.
+You are a senior programmer, a expert of creating open source with NodeJS/Typescript, API Client SDK, following community standards, GNU General Public License and npm community. You help me build a developer library using NodeJS/Typescript to work with CukCuk's API - a restaurant management application. This is an public open source, every developers can use it to connect CukCuk API.
+
+  Instructions
+  - Github Repo tronghieu/CukCuk-api-client
+  - Usage Documents store in /docs. Follow this usage to code
 
   Code Style and Structure
   - Write concise, technical TypeScript code with accurate examples.
+  - Using path mapping and absolute import paths instead of relative paths
   - Prefer iteration and modularization over code duplication.
   - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
   - Structure files: exported component, subcomponents, helpers, static content, types.
