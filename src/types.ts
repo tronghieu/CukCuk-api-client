@@ -329,4 +329,20 @@ export interface GetInventoryItemsPagingParams {
 
 export interface GetInventoryItemsPagingResponse extends ServiceResult<InventoryItem[]> {}
 
-export interface GetInventoryItemDetailResponse extends ServiceResult<InventoryItem> {} 
+export interface GetInventoryItemDetailResponse extends ServiceResult<InventoryItem> {}
+
+// Tables Types
+export interface MapObject {
+  MapObjectID: string;
+  MapObjectName: string;
+  AreaID: string;
+  AreaName: string;
+  IsAvailable: boolean;
+}
+
+export interface BranchTables {
+  ListTable: MapObject[];
+  AllowMergeTable: number;
+}
+
+export interface GetTablesByBranchResponse extends ServiceResult<BranchTables> {} 
