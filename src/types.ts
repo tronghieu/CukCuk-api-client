@@ -290,10 +290,24 @@ export interface GetEmployeesPagingResponse extends ServiceResult<Employee[]> {}
 
 // Inventory Items Types
 export interface InventoryItemAddition {
-  AdditionId: string;
+  Id: string;
   Description: string;
   Price: number;
-  InActive: boolean;
+  Quantity: number;
+}
+
+export interface OrderOnlineItem {
+  Id: string;
+  Code: string;
+  ItemType: number;
+  Name: string;
+  Price: number;
+  UnitID: string;
+  UnitName: string;
+  Note?: string;
+  Quantity: number;
+  Children?: OrderOnlineItem[];
+  Additions?: InventoryItemAddition[];
 }
 
 export interface InventoryItemAdditionCategory {
@@ -345,4 +359,38 @@ export interface BranchTables {
   AllowMergeTable: number;
 }
 
-export interface GetTablesByBranchResponse extends ServiceResult<BranchTables> {} 
+export interface GetTablesByBranchResponse extends ServiceResult<BranchTables> {}
+
+// Online Order Types
+export interface CreateOrderOnlineParams {
+  BranchId: string;
+  OrderId?: string;
+  OrderCode?: string;
+  OrderType: number;
+  CustomerId?: string;
+  CustomerName?: string;
+  CustomerTel?: string;
+  CustomerEmail?: string;
+  ShippingAddress?: string;
+  ShippingDueDate?: string;
+  ShippingTimeType?: number;
+  OrderNote?: string;
+  TotalAmount?: number;
+  Amount?: number;
+  TaxAmount?: number;
+  DiscountAmount?: number;
+  DeliveryAmount?: number;
+  DepositAmount?: number;
+  PaymentStatus: number;
+  OrderSource: number;
+  OrderItems: OrderOnlineItem[];
+}
+
+export interface CreateOrderOnlineResponse {
+  Code: number;
+  Total: number;
+  Data: string; // OrderCode
+  Success: boolean;
+  ErrorType?: number;
+  ErrorMessage?: string;
+} 
