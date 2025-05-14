@@ -190,4 +190,207 @@ export interface UpdateOrderItemsResponse {
   Data: Order;
   Total: number;
   Success: boolean;
+}
+
+// Categories Types
+export interface InventoryItemCategory {
+  Id: string;
+  Code: string;
+  Name: string;
+  Description: string;
+  Inactive: boolean;
+  IsLeaf: boolean;
+  Grade: number;
+}
+
+export interface GetCategoriesListParams {
+  includeInactive?: boolean;
+}
+
+export interface GetCategoriesListResponse {
+  Code: number;
+  Data: InventoryItemCategory[];
+  Total: number;
+  Success: boolean;
+  ErrorType: number;
+  ErrorMessage: string | null;
+}
+
+export interface ServiceResult<T> {
+  Code: number;
+  Data: T;
+  Total: number;
+  Success: boolean;
+  ErrorType?: number;
+  ErrorMessage?: string;
+  Environment?: string;
+}
+
+export interface Customer {
+  Id?: string;
+  BranchId?: string;
+  OriginalBranchId?: string;
+  Code?: string;
+  Name: string;
+  CustomerCategoryID?: string;
+  CustomerCategoryName?: string;
+  Tel: string;
+  Address?: string;
+  Email?: string;
+  Description?: string;
+  IdentifyNumber?: string;
+  Birthday?: string;
+  Inactive?: boolean;
+  OldNumberCard?: string;
+  CardStartDate?: string;
+  CardExpireDate?: string;
+  NormalizedTel?: string;
+  TotalAmount?: number;
+}
+
+export interface CreateCustomerParams extends Omit<Customer, 'Id' | 'NormalizedTel' | 'TotalAmount'> {}
+
+export interface CreateCustomerResponse extends ServiceResult<Customer[]> {}
+
+export interface GetCustomersPagingParams {
+  Page: number;
+  Limit: number;
+  IncludeInactive?: boolean;
+  LastSyncDate?: string;
+}
+
+export interface GetCustomersPagingResponse extends ServiceResult<Customer[]> {}
+
+// Employee Types
+export interface Employee {
+  Id: string;
+  BranchId: string;
+  Code: string;
+  FirstName: string;
+  LastName: string;
+  FullName: string;
+  Gender: number;
+  Mobile: string;
+  HomeTel: string;
+  Email: string;
+  IdentifyNumber: string;
+  CurrentAddress: string;
+  NativeAddress: string;
+  RoleCode: string;
+}
+
+export interface GetEmployeesPagingParams {
+  Page: number;
+  Limit: number;
+  BranchId?: string;
+  LastSyncDate?: string;
+}
+
+export interface GetEmployeesPagingResponse extends ServiceResult<Employee[]> {}
+
+// Inventory Items Types
+export interface InventoryItemAddition {
+  Id: string;
+  Description: string;
+  Price: number;
+  Quantity: number;
+}
+
+export interface OrderOnlineItem {
+  Id: string;
+  Code: string;
+  ItemType: number;
+  Name: string;
+  Price: number;
+  UnitID: string;
+  UnitName: string;
+  Note?: string;
+  Quantity: number;
+  Children?: OrderOnlineItem[];
+  Additions?: InventoryItemAddition[];
+}
+
+export interface InventoryItemAdditionCategory {
+  Additions: InventoryItemAddition[];
+}
+
+export interface InventoryItem {
+  Id: string;
+  Code: string;
+  Name: string;
+  ItemType: number;
+  CategoryID: string;
+  CategoryName: string;
+  Price: number;
+  Inactive: boolean;
+  UnitID: string;
+  UnitName: string;
+  Description: string;
+  IsSeftPrice: boolean;
+  AllowAdjustPrice: boolean;
+  Children?: InventoryItem[];
+  AdditionCategories?: InventoryItemAdditionCategory[];
+}
+
+export interface GetInventoryItemsPagingParams {
+  Page: number;
+  Limit: number;
+  BranchId?: string;
+  CategoryId?: string;
+  KeySearch?: string;
+  IncludeInactive?: boolean;
+}
+
+export interface GetInventoryItemsPagingResponse extends ServiceResult<InventoryItem[]> {}
+
+export interface GetInventoryItemDetailResponse extends ServiceResult<InventoryItem> {}
+
+// Tables Types
+export interface MapObject {
+  MapObjectID: string;
+  MapObjectName: string;
+  AreaID: string;
+  AreaName: string;
+  IsAvailable: boolean;
+}
+
+export interface BranchTables {
+  ListTable: MapObject[];
+  AllowMergeTable: number;
+}
+
+export interface GetTablesByBranchResponse extends ServiceResult<BranchTables> {}
+
+// Online Order Types
+export interface CreateOrderOnlineParams {
+  BranchId: string;
+  OrderId?: string;
+  OrderCode?: string;
+  OrderType: number;
+  CustomerId?: string;
+  CustomerName?: string;
+  CustomerTel?: string;
+  CustomerEmail?: string;
+  ShippingAddress?: string;
+  ShippingDueDate?: string;
+  ShippingTimeType?: number;
+  OrderNote?: string;
+  TotalAmount?: number;
+  Amount?: number;
+  TaxAmount?: number;
+  DiscountAmount?: number;
+  DeliveryAmount?: number;
+  DepositAmount?: number;
+  PaymentStatus: number;
+  OrderSource: number;
+  OrderItems: OrderOnlineItem[];
+}
+
+export interface CreateOrderOnlineResponse {
+  Code: number;
+  Total: number;
+  Data: string; // OrderCode
+  Success: boolean;
+  ErrorType?: number;
+  ErrorMessage?: string;
 } 

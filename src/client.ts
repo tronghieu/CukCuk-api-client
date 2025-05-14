@@ -7,9 +7,13 @@ import type {
   LoginResponse
 } from '@/types';
 import { BranchesApi } from './branches';
+import { CategoriesApi } from './categories';
 import * as crypto from 'crypto';
 import { OrdersApi } from './orders';
-
+import { CustomersApi } from './customers';
+import { EmployeesApi } from './employees';
+import { InventoryItemsApi } from './inventory-items';
+import { TablesApi } from './tables';
 export class CukCukClient {
   private readonly client: AxiosInstance;
   private readonly config: ClientConfig;
@@ -99,5 +103,21 @@ export class CukCukClient {
   // Branches API
   public branches = new BranchesApi(this);
 
+  // Categories API
+  public categories = new CategoriesApi(this);
+
+  // Orders API
   public orders = new OrdersApi(this);
+
+  // Customers API
+  public customers = new CustomersApi(this);
+
+  // Employees API
+  public employees = new EmployeesApi(this);
+
+  // Inventory Items API
+  public inventoryItems = new InventoryItemsApi(this);
+
+  // Tables API
+  public tables = new TablesApi(this);
 } 
