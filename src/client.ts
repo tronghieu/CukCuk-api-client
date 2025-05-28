@@ -69,7 +69,7 @@ export class CukCukClient {
   // Public method for making API requests
   public async makeRequest<T>(config: AxiosRequestConfig): Promise<T> {
     const response = await this.request<T>(config);
-    return response.Data;
+    return response as T;
   }
 
   // Account API
