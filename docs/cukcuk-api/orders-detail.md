@@ -1,37 +1,29 @@
-# Orders API - Chi tiết đơn hàng | CUKCUK OpenPlatform API 
+# Orders API - Chi tiết đơn hàng | CUKCUK OpenPlatform API
+
 API lấy thông tin chi tiết đơn hàng từ id của đơn hàng
 
 Các thông tin cấu hình cần thiết:
 
-
-|Tên        |Mô tả               |
-|-----------|--------------------|
-|CompanyCode|Mã nhà hàng lấy     |
-|AccessToken|Chuỗi token xác thực|
-
+| Tên         | Mô tả                |
+| ----------- | -------------------- |
+| CompanyCode | Mã nhà hàng lấy      |
+| AccessToken | Chuỗi token xác thực |
 
 Để lấy các thông tin trên xem bài viết [account/login](index.html)
 
-About
------
+## About
 
+| URL                | Phiên bản | Thay đổi |
+| ------------------ | --------- | -------- |
+| graphapi.cukcuk.vn | 1.0       |          |
 
-|URL               |Phiên bản|Thay đổi|
-|------------------|---------|--------|
-|graphapi.cukcuk.vn|1.0      |        |
+## Schemes
 
+| Scheme |
+| ------ |
+| https  |
 
-Schemes
--------
-
-
-|Scheme|
-|------|
-|https |
-
-
-Endpoints
----------
+## Endpoints
 
 ### api/v1/orders/`{orderId}`
 
@@ -41,51 +33,44 @@ Lấy chi tiết đơn hàng theo id
 
 ##### Expected Response Types
 
-
-
-* HttpCode: 401
-  * ServiceResult.ErrorType: 
-  * Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 0
-  * Mô tả: Không có lỗi
-* HttpCode: 200
-  * ServiceResult.ErrorType: 1
-  * Mô tả: Tham số không hợp lệ null or empty
-* HttpCode: 200
-  * ServiceResult.ErrorType: 2
-  * Mô tả: Mã nhà hàng không tồn tại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 5
-  * Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 6
-  * Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 7
-  * Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
-* HttpCode: 200
-  * ServiceResult.ErrorType: 100
-  * Mô tả: Lỗi nội bộ API Graph
-* HttpCode: 200
-  * ServiceResult.ErrorType: 102
-  * Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.
-
+- HttpCode: 401
+  - ServiceResult.ErrorType:
+  - Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 0
+  - Mô tả: Không có lỗi
+- HttpCode: 200
+  - ServiceResult.ErrorType: 1
+  - Mô tả: Tham số không hợp lệ null or empty
+- HttpCode: 200
+  - ServiceResult.ErrorType: 2
+  - Mô tả: Mã nhà hàng không tồn tại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 5
+  - Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 6
+  - Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 7
+  - Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
+- HttpCode: 200
+  - ServiceResult.ErrorType: 100
+  - Mô tả: Lỗi nội bộ API Graph
+- HttpCode: 200
+  - ServiceResult.ErrorType: 102
+  - Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.
 
 ##### Parameters
 
+| Name    | In  | Description | Required? | Type   |
+| ------- | --- | ----------- | --------- | ------ |
+| orderId | uri | Id đơn hàng | true      | string |
 
-|Name   |In |Description|Required?|Type  |
-|-------|---|-----------|---------|------|
-|orderId|uri|Id đơn hàng|true     |string|
-
-
-
-|Name         |In    |Description                                              |Required?|Type  |
-|-------------|------|---------------------------------------------------------|---------|------|
-|Authorization|header|Header key cấu hình AccessToken (dạng Bearer AccessToken)|true     |string|
-|CompanyCode  |header|Header key cấu hình mã nhà hàng CompanyCode              |true     |string|
-
+| Name          | In     | Description                                               | Required? | Type   |
+| ------------- | ------ | --------------------------------------------------------- | --------- | ------ |
+| Authorization | header | Header key cấu hình AccessToken (dạng Bearer AccessToken) | true      | string |
+| CompanyCode   | header | Header key cấu hình mã nhà hàng CompanyCode               | true      | string |
 
 Ví dụ:
 
@@ -95,22 +80,17 @@ Authorization: Bearer utFYFHGRrnz-JWVCViIjy4k3CtKWOJDBY6wvL5X_5k9jm14tLIP6qPgCXd
 
 ```
 
-
 ##### Content Types Produced
 
-
-|Produces        |
-|----------------|
-|application/json|
-
+| Produces         |
+| ---------------- |
+| application/json |
 
 ##### Content Types Consumed
 
-
-|Consumes        |
-|----------------|
-|application/json|
-
+| Consumes         |
+| ---------------- |
+| application/json |
 
 ##### Response
 
@@ -131,7 +111,7 @@ Hệ thống sẽ trả về [ServiceResult](#serviceresult-definition) với Da
     "Id": "cbfeea95-6996-4b86-9f7b-915b3217726f",
     "Type": 3,
     "No": "1.2",
-    "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+    "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
     "Status": 4,
     "Date": "2020-07-29T11:06:16.837",
     "ShippingDate": "2020-07-29T11:36:05",
@@ -174,171 +154,156 @@ Hệ thống sẽ trả về [ServiceResult](#serviceresult-definition) với Da
 
 ```
 
-
-Definitions
------------
+## Definitions
 
 ### Order Definition
 
-
-
-* Property: Id
-  * Type: string
-  * Format: guid
-  * Mô tả: Id đơn hàng
-* Property: No
-  * Type: string
-  * Format: 
-  * Mô tả: Số đơn hàng
-* Property: Type
-  * Type: int
-  * Format: 
-  * Mô tả: Loại đơn hàng (1 - phục vụ tại bàn, 2 - mang về, 3 - giao hàng)
-* Property: BranchId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id chi nhánh bán hàng
-* Property: Status
-  * Type: int
-  * Format: 
-  * Mô tả: Trạng thái đơn hàng, xem tại đây
-* Property: OrderDetails
-  * Type: Array<OrderDetail>
-  * Format: 
-  * Mô tả: Danh sách hàng hóa trong đơn hàng
-* Property: Date
-  * Type: string
-  * Format: datetime
-  * Mô tả: Ngày, giờ lập đơn
-* Property: ShippingDate
-  * Type: string
-  * Format: datetime
-  * Mô tả: Ngày, giờ giao hàng
-* Property: CustomerId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id khách hàng
-* Property: CustomerName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên khách hàng
-* Property: CustomerTel
-  * Type: string
-  * Format: 
-  * Mô tả: Số điện thoại khách hàng
-* Property: ShippingAddress
-  * Type: string
-  * Format: 
-  * Mô tả: Địa chỉ giao hàng
-* Property: DeliveryAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Phí giao hàng
-* Property: DepositAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền khách đặt trước
-* Property: TotalAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tổng đơn hàng
-* Property: TableName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên bàn hoặc danh sách các bàn tạo order
-
+- Property: Id
+  - Type: string
+  - Format: guid
+  - Mô tả: Id đơn hàng
+- Property: No
+  - Type: string
+  - Format:
+  - Mô tả: Số đơn hàng
+- Property: Type
+  - Type: int
+  - Format:
+  - Mô tả: Loại đơn hàng (1 - phục vụ tại bàn, 2 - mang về, 3 - giao hàng)
+- Property: BranchId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id chi nhánh bán hàng
+- Property: Status
+  - Type: int
+  - Format:
+  - Mô tả: Trạng thái đơn hàng, xem tại đây
+- Property: OrderDetails
+  - Type: Array<OrderDetail>
+  - Format:
+  - Mô tả: Danh sách hàng hóa trong đơn hàng
+- Property: Date
+  - Type: string
+  - Format: datetime
+  - Mô tả: Ngày, giờ lập đơn
+- Property: ShippingDate
+  - Type: string
+  - Format: datetime
+  - Mô tả: Ngày, giờ giao hàng
+- Property: CustomerId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id khách hàng
+- Property: CustomerName
+  - Type: string
+  - Format:
+  - Mô tả: Tên khách hàng
+- Property: CustomerTel
+  - Type: string
+  - Format:
+  - Mô tả: Số điện thoại khách hàng
+- Property: ShippingAddress
+  - Type: string
+  - Format:
+  - Mô tả: Địa chỉ giao hàng
+- Property: DeliveryAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Phí giao hàng
+- Property: DepositAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền khách đặt trước
+- Property: TotalAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tổng đơn hàng
+- Property: TableName
+  - Type: string
+  - Format:
+  - Mô tả: Tên bàn hoặc danh sách các bàn tạo order
 
 ### OrderStatus Definition
 
-
-|Giá trị|Mô tả             |
-|-------|------------------|
-|0      |Không xác định    |
-|1      |Đang phục vụ      |
-|3      |Yêu cầu thanh toán|
-|4      |Đã thanh toán     |
-|5      |Đã hủy            |
-|6      |Đặt trước         |
-|7      |Chưa gửi bếp bar  |
-|8      |Chưa chế biến     |
-|9      |Đang chờ giao hàng|
-|10     |Đang giao hàng    |
-|11     |Đã giao hàng      |
-
+| Giá trị | Mô tả              |
+| ------- | ------------------ |
+| 0       | Không xác định     |
+| 1       | Đang phục vụ       |
+| 3       | Yêu cầu thanh toán |
+| 4       | Đã thanh toán      |
+| 5       | Đã hủy             |
+| 6       | Đặt trước          |
+| 7       | Chưa gửi bếp bar   |
+| 8       | Chưa chế biến      |
+| 9       | Đang chờ giao hàng |
+| 10      | Đang giao hàng     |
+| 11      | Đã giao hàng       |
 
 ### OrderDetail Definition
 
-
-|Property  |Type   |Format|Mô tả              |
-|----------|-------|------|-------------------|
-|Id        |int    |      |Id detail          |
-|ItemId    |string |guid  |Id hàng hóa        |
-|AdditionId|string |guid  |Id sở thích phục vụ|
-|ParentId  |string |guid  |Id detail món cha  |
-|ItemName  |string |      |Tên hàng hóa       |
-|UnitId    |string |guid  |Id Đơn vị tính     |
-|UnitName  |string |      |Tên đơn vị tính    |
-|Quantity  |decimal|      |Số lượng           |
-|Price     |decimal|      |Đơn giá            |
-|Amount    |decimal|      |Thành tiền         |
-
+| Property   | Type    | Format | Mô tả               |
+| ---------- | ------- | ------ | ------------------- |
+| Id         | int     |        | Id detail           |
+| ItemId     | string  | guid   | Id hàng hóa         |
+| AdditionId | string  | guid   | Id sở thích phục vụ |
+| ParentId   | string  | guid   | Id detail món cha   |
+| ItemName   | string  |        | Tên hàng hóa        |
+| UnitId     | string  | guid   | Id Đơn vị tính      |
+| UnitName   | string  |        | Tên đơn vị tính     |
+| Quantity   | decimal |        | Số lượng            |
+| Price      | decimal |        | Đơn giá             |
+| Amount     | decimal |        | Thành tiền          |
 
 ### ServiceResult Definition
 
-
-|Property    |Type  |Format|Mô tả                                     |
-|------------|------|------|------------------------------------------|
-|Code        |int   |      |Mã lỗi HttpCode (200, 500...)             |
-|ErrorType   |int   |      |Loại lỗi                                  |
-|ErrorMessage|string|      |Thông tin lỗi                             |
-|Success     |bool  |      |True - không có lỗi logic xảy ra          |
-|Environment |string|      |Môi trường triển khai của api             |
-|Data        |string|object|Dữ liệu trả về client                     |
-|Total       |int   |      |Tổng số bản ghi khi lấy dữ liệu phân trang|
-
+| Property     | Type   | Format | Mô tả                                      |
+| ------------ | ------ | ------ | ------------------------------------------ |
+| Code         | int    |        | Mã lỗi HttpCode (200, 500...)              |
+| ErrorType    | int    |        | Loại lỗi                                   |
+| ErrorMessage | string |        | Thông tin lỗi                              |
+| Success      | bool   |        | True - không có lỗi logic xảy ra           |
+| Environment  | string |        | Môi trường triển khai của api              |
+| Data         | string | object | Dữ liệu trả về client                      |
+| Total        | int    |        | Tổng số bản ghi khi lấy dữ liệu phân trang |
 
 ### ErrorType Definition
 
-*   Dải mã lỗi chung
+- Dải mã lỗi chung
 
+- HttpCode: 401
+  - ServiceResult.ErrorType:
+  - Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 0
+  - Mô tả: Không có lỗi
+- HttpCode: 200
+  - ServiceResult.ErrorType: 1
+  - Mô tả: Tham số không hợp lệ null or empty
+- HttpCode: 200
+  - ServiceResult.ErrorType: 2
+  - Mô tả: Mã nhà hàng không tồn tại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 3
+  - Mô tả: Mã Appid không tồn tại trên hệ thống
+- HttpCode: 200
+  - ServiceResult.ErrorType: 4
+  - Mô tả: Chuỗi thông tin chữ ký đăng nhập không hợp lệ, timeout
+- HttpCode: 200
+  - ServiceResult.ErrorType: 5
+  - Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 6
+  - Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
+- HttpCode: 200
 
+  - ServiceResult.ErrorType: 7
+  - Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
 
-* HttpCode: 401
-  * ServiceResult.ErrorType: 
-  * Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 0
-  * Mô tả: Không có lỗi
-* HttpCode: 200
-  * ServiceResult.ErrorType: 1
-  * Mô tả: Tham số không hợp lệ null or empty
-* HttpCode: 200
-  * ServiceResult.ErrorType: 2
-  * Mô tả: Mã nhà hàng không tồn tại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 3
-  * Mô tả: Mã Appid không tồn tại trên hệ thống
-* HttpCode: 200
-  * ServiceResult.ErrorType: 4
-  * Mô tả: Chuỗi thông tin chữ ký đăng nhập không hợp lệ, timeout
-* HttpCode: 200
-  * ServiceResult.ErrorType: 5
-  * Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 6
-  * Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 7
-  * Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
+- Dải mã lỗi nghiêm trọng
 
-
-*   Dải mã lỗi nghiêm trọng
-
-
-
-* HttpCode: 200
-  * ServiceResult.ErrorType: 100
-  * Mô tả: Lỗi nội bộ API Graph
-* HttpCode: 200
-  * ServiceResult.ErrorType: 102
-  * Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.  Ví dụ: Khi đang gọi api login mà api chưa trả về dữ liệu lại tiếp tục gọi request login này sẽ trả về lỗi này.
+- HttpCode: 200
+  - ServiceResult.ErrorType: 100
+  - Mô tả: Lỗi nội bộ API Graph
+- HttpCode: 200
+  - ServiceResult.ErrorType: 102
+  - Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại. Ví dụ: Khi đang gọi api login mà api chưa trả về dữ liệu lại tiếp tục gọi request login này sẽ trả về lỗi này.

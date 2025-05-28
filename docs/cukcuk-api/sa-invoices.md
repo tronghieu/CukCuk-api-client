@@ -1,37 +1,29 @@
-# SAInvoice API - Thông tin hóa đơn | CUKCUK OpenPlatform API 
+# SAInvoice API - Thông tin hóa đơn | CUKCUK OpenPlatform API
+
 API thực hiện lấy thông tin hóa đơn và thông tin chi tiết hóa đơn từ id của hóa đơn.
 
 Các thông tin cấu hình cần thiết:
 
-
-|Tên        |Mô tả               |
-|-----------|--------------------|
-|CompanyCode|Mã nhà hàng lấy     |
-|AccessToken|Chuỗi token xác thực|
-
+| Tên         | Mô tả                |
+| ----------- | -------------------- |
+| CompanyCode | Mã nhà hàng lấy      |
+| AccessToken | Chuỗi token xác thực |
 
 Để lấy các thông tin trên xem bài viết [account/login](index.html)
 
-About
------
+## About
 
+| URL                | Phiên bản | Thay đổi |
+| ------------------ | --------- | -------- |
+| graphapi.cukcuk.vn | 1.0       |          |
 
-|URL               |Phiên bản|Thay đổi|
-|------------------|---------|--------|
-|graphapi.cukcuk.vn|1.0      |        |
+## Schemes
 
+| Scheme |
+| ------ |
+| https  |
 
-Schemes
--------
-
-
-|Scheme|
-|------|
-|https |
-
-
-Endpoints
----------
+## Endpoints
 
 ### api/v1/sainvoices/`{refId}`
 
@@ -41,51 +33,44 @@ Lấy chi tiết hóa đơn theo id
 
 ##### Expected Response Types
 
-
-
-* HttpCode: 401
-  * ServiceResult.ErrorType: 
-  * Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 0
-  * Mô tả: Không có lỗi
-* HttpCode: 200
-  * ServiceResult.ErrorType: 1
-  * Mô tả: Tham số không hợp lệ null or empty
-* HttpCode: 200
-  * ServiceResult.ErrorType: 2
-  * Mô tả: Mã nhà hàng không tồn tại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 5
-  * Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 6
-  * Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 7
-  * Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
-* HttpCode: 200
-  * ServiceResult.ErrorType: 100
-  * Mô tả: Lỗi nội bộ API Graph
-* HttpCode: 200
-  * ServiceResult.ErrorType: 102
-  * Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.
-
+- HttpCode: 401
+  - ServiceResult.ErrorType:
+  - Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 0
+  - Mô tả: Không có lỗi
+- HttpCode: 200
+  - ServiceResult.ErrorType: 1
+  - Mô tả: Tham số không hợp lệ null or empty
+- HttpCode: 200
+  - ServiceResult.ErrorType: 2
+  - Mô tả: Mã nhà hàng không tồn tại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 5
+  - Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 6
+  - Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 7
+  - Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
+- HttpCode: 200
+  - ServiceResult.ErrorType: 100
+  - Mô tả: Lỗi nội bộ API Graph
+- HttpCode: 200
+  - ServiceResult.ErrorType: 102
+  - Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.
 
 ##### Parameters
 
+| Name  | In  | Description                  | Required? | Type   |
+| ----- | --- | ---------------------------- | --------- | ------ |
+| refId | uri | id hóa đơn cần lấy thông tin | true      | string |
 
-|Name |In |Description                 |Required?|Type  |
-|-----|---|----------------------------|---------|------|
-|refId|uri|id hóa đơn cần lấy thông tin|true     |string|
-
-
-
-|Name         |In    |Description                                              |Required?|Type  |
-|-------------|------|---------------------------------------------------------|---------|------|
-|Authorization|header|Header key cấu hình AccessToken (dạng Bearer AccessToken)|true     |string|
-|CompanyCode  |header|Header key cấu hình mã nhà hàng CompanyCode              |true     |string|
-
+| Name          | In     | Description                                               | Required? | Type   |
+| ------------- | ------ | --------------------------------------------------------- | --------- | ------ |
+| Authorization | header | Header key cấu hình AccessToken (dạng Bearer AccessToken) | true      | string |
+| CompanyCode   | header | Header key cấu hình mã nhà hàng CompanyCode               | true      | string |
 
 Ví dụ:
 
@@ -95,22 +80,17 @@ Authorization: Bearer utFYFHGRrnz-JWVCViIjy4k3CtKWOJDBY6wvL5X_5k9jm14tLIP6qPgCXd
 
 ```
 
-
 ##### Content Types Produced
 
-
-|Produces        |
-|----------------|
-|application/json|
-
+| Produces         |
+| ---------------- |
+| application/json |
 
 ##### Content Types Consumed
 
-
-|Consumes        |
-|----------------|
-|application/json|
-
+| Consumes         |
+| ---------------- |
+| application/json |
 
 ##### Response
 
@@ -132,7 +112,7 @@ Hệ thống sẽ trả về [ServiceResult](#serviceresult-definition) với Se
     "RefType": 550,
     "RefNo": "2007000044",
     "RefDate": "2020-07-24T16:44:32.577",
-    "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+    "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
     "OrderId": "846fe019-87f1-4e8b-a0f4-50739494a496",
     "OrderType": 1,
     "EmployeeId": "12c271ea-478c-4350-b55d-162d66208838",
@@ -242,730 +222,690 @@ Hệ thống sẽ trả về [ServiceResult](#serviceresult-definition) với Se
 
 ```
 
-
-Definitions
------------
+## Definitions
 
 ### SAInvoice Definition
 
-
-
-* Property: RefId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id hóa đơn
-* Property: RefType
-  * Type: int
-  * Format: 
-  * Mô tả: Loại hóa đơn
-* Property: RefNo
-  * Type: string
-  * Format: 
-  * Mô tả: Số hóa đơn
-* Property: RefDate
-  * Type: datetime
-  * Format: 
-  * Mô tả: Ngày phát sinh hóa đơn
-* Property: BranchId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id chi nhánh
-* Property: OrderId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id đơn hàng được thanh toán
-* Property: OrderType
-  * Type: int
-  * Format: 
-  * Mô tả: Loại đơn hàng, xem tại đây
-* Property: ShippingDate
-  * Type: datetime
-  * Format: 
-  * Mô tả: Thời gian giao hàng
-* Property: ShippingDueDate
-  * Type: datetime
-  * Format: 
-  * Mô tả: Thời gian hẹn trả khách
-* Property: CustomerId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id khách hàng
-* Property: CustomerName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên khách hàng
-* Property: CustomerTel
-  * Type: string
-  * Format: 
-  * Mô tả: Số điện thoại khách hàng
-* Property: MembershipCardId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id hạng thẻ của khách tại thời gian phát sinh hóa đơn
-* Property: EmployeeId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id nhân viên thu ngân
-* Property: EmployeeName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên nhân viên thu ngân
-* Property: DeliveryEmployeeId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id nhân viên giao hàng
-* Property: DeliveryEmployeeName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên nhân viên giao hàng
-* Property: DeliveryPartnerID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id đối tác giao hàng
-* Property: DeliveryPartnerName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên đối tác giao hàng
-* Property: WaiterEmployeeId
-  * Type: string
-  * Format: guid
-  * Mô tả: Tên nhân viên phục vụ
-* Property: WaiterEmployeeName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên nhân viên phục vụ
-* Property: ShippingAddress
-  * Type: string
-  * Format: 
-  * Mô tả: Địa chỉ giao hàng (với đơn hàng giao tận nơi)
-* Property: PromotionId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id chương trình khuyến mại theo hóa đơn
-* Property: PromotionName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên chương trình khuyến mại theo hóa đơn
-* Property: TableName
-  * Type: string
-  * Format: 
-  * Mô tả: Bàn được chọn (với đơn hàng phục vụ tại bàn)
-* Property: Description
-  * Type: string
-  * Format: 
-  * Mô tả: Ghi chú cho hóa đơn
-* Property: DepositAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền đặt cọc
-* Property: Amount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền hàng
-* Property: DeliveryAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Phí giao hàng
-* Property: ServiceRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tỷ lệ phí dịch vụ (tính theo %)
-* Property: ServiceAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Phí dịch vụ
-* Property: VATRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tỷ lệ thuế (tính theo %)
-* Property: VATAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền thuế
-* Property: DiscountAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Số tiền khuyến mại
-* Property: PromotionRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tỷ lệ khuyến mại theo hóa đơn (tính theo %)
-* Property: PromotionAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Giảm giá theo hóa đơn
-* Property: PromotionItemsAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Giảm giá các mặt hàng
-* Property: ReceiveAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Số tiền đã trả
-* Property: ReturnAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Số tiền trả lại cho khách
-* Property: TotalAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tổng thanh toán
-* Property: SaleAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Doanh số
-* Property: TotalItemAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Thành tiền
-* Property: TotalItemAmountAfterTax
-  * Type: decimal
-  * Format: 
-  * Mô tả: Thành tiền sau thuế
-* Property: TipAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền tip
-* Property: ServiceTaxRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Thuế suất cho phí dịch vụ
-* Property: DeliveryTaxRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Thuế suất cho phí giao hàng
-* Property: CancelDate
-  * Type: datetime
-  * Format: 
-  * Mô tả: Ngày hủy hóa đơn
-* Property: CancelBy
-  * Type: string
-  * Format: 
-  * Mô tả: Tên người hủy hóa đơn
-* Property: CancelReason
-  * Type: string
-  * Format: 
-  * Mô tả: Lý do hủy hóa đơn
-* Property: PaymentStatus
-  * Type: int
-  * Format: 
-  * Mô tả: Trạng thái thanh toán hóa đơn, xem tại đây[#paymentstatus-definition]
-* Property: AvailablePoint
-  * Type: int
-  * Format: 
-  * Mô tả: Số điểm có trước khi thanh toán hóa đơn
-* Property: UsedPoint
-  * Type: int
-  * Format: 
-  * Mô tả: Số điểm sử dụng trong hóa đơn
-* Property: AddPoint
-  * Type: int
-  * Format: 
-  * Mô tả: Số điểm tích được trong hóa đơn
-* Property: SAInvoiceDetails
-  * Type: Array<InvoiceDetail>
-  * Format: 
-  * Mô tả: Danh sách hàng hóa chi tiết trong hóa đơn
-* Property: SAInvoicePayments
-  * Type: Array<InvoicePayment>
-  * Format: 
-  * Mô tả: Danh sách thông tin thanh toán của hóa đơn
-* Property: SAInvoiceCoupons
-  * Type: Array<InvoiceCoupon>
-  * Format: 
-  * Mô tả: Danh sách các mã ưu đãi trong hóa đơn
-* Property: SAVATInfo
-  * Type: SAVATInfo
-  * Format: 
-  * Mô tả: Thông tin phát hành hóa đơn GTGT
-
+- Property: RefId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id hóa đơn
+- Property: RefType
+  - Type: int
+  - Format:
+  - Mô tả: Loại hóa đơn
+- Property: RefNo
+  - Type: string
+  - Format:
+  - Mô tả: Số hóa đơn
+- Property: RefDate
+  - Type: datetime
+  - Format:
+  - Mô tả: Ngày phát sinh hóa đơn
+- Property: BranchId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id chi nhánh
+- Property: OrderId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id đơn hàng được thanh toán
+- Property: OrderType
+  - Type: int
+  - Format:
+  - Mô tả: Loại đơn hàng, xem tại đây
+- Property: ShippingDate
+  - Type: datetime
+  - Format:
+  - Mô tả: Thời gian giao hàng
+- Property: ShippingDueDate
+  - Type: datetime
+  - Format:
+  - Mô tả: Thời gian hẹn trả khách
+- Property: CustomerId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id khách hàng
+- Property: CustomerName
+  - Type: string
+  - Format:
+  - Mô tả: Tên khách hàng
+- Property: CustomerTel
+  - Type: string
+  - Format:
+  - Mô tả: Số điện thoại khách hàng
+- Property: MembershipCardId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id hạng thẻ của khách tại thời gian phát sinh hóa đơn
+- Property: EmployeeId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id nhân viên thu ngân
+- Property: EmployeeName
+  - Type: string
+  - Format:
+  - Mô tả: Tên nhân viên thu ngân
+- Property: DeliveryEmployeeId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id nhân viên giao hàng
+- Property: DeliveryEmployeeName
+  - Type: string
+  - Format:
+  - Mô tả: Tên nhân viên giao hàng
+- Property: DeliveryPartnerID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id đối tác giao hàng
+- Property: DeliveryPartnerName
+  - Type: string
+  - Format:
+  - Mô tả: Tên đối tác giao hàng
+- Property: WaiterEmployeeId
+  - Type: string
+  - Format: guid
+  - Mô tả: Tên nhân viên phục vụ
+- Property: WaiterEmployeeName
+  - Type: string
+  - Format:
+  - Mô tả: Tên nhân viên phục vụ
+- Property: ShippingAddress
+  - Type: string
+  - Format:
+  - Mô tả: Địa chỉ giao hàng (với đơn hàng giao tận nơi)
+- Property: PromotionId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id chương trình khuyến mại theo hóa đơn
+- Property: PromotionName
+  - Type: string
+  - Format:
+  - Mô tả: Tên chương trình khuyến mại theo hóa đơn
+- Property: TableName
+  - Type: string
+  - Format:
+  - Mô tả: Bàn được chọn (với đơn hàng phục vụ tại bàn)
+- Property: Description
+  - Type: string
+  - Format:
+  - Mô tả: Ghi chú cho hóa đơn
+- Property: DepositAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền đặt cọc
+- Property: Amount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền hàng
+- Property: DeliveryAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Phí giao hàng
+- Property: ServiceRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Tỷ lệ phí dịch vụ (tính theo %)
+- Property: ServiceAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Phí dịch vụ
+- Property: VATRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Tỷ lệ thuế (tính theo %)
+- Property: VATAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền thuế
+- Property: DiscountAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Số tiền khuyến mại
+- Property: PromotionRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Tỷ lệ khuyến mại theo hóa đơn (tính theo %)
+- Property: PromotionAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Giảm giá theo hóa đơn
+- Property: PromotionItemsAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Giảm giá các mặt hàng
+- Property: ReceiveAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Số tiền đã trả
+- Property: ReturnAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Số tiền trả lại cho khách
+- Property: TotalAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tổng thanh toán
+- Property: SaleAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Doanh số
+- Property: TotalItemAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Thành tiền
+- Property: TotalItemAmountAfterTax
+  - Type: decimal
+  - Format:
+  - Mô tả: Thành tiền sau thuế
+- Property: TipAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền tip
+- Property: ServiceTaxRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Thuế suất cho phí dịch vụ
+- Property: DeliveryTaxRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Thuế suất cho phí giao hàng
+- Property: CancelDate
+  - Type: datetime
+  - Format:
+  - Mô tả: Ngày hủy hóa đơn
+- Property: CancelBy
+  - Type: string
+  - Format:
+  - Mô tả: Tên người hủy hóa đơn
+- Property: CancelReason
+  - Type: string
+  - Format:
+  - Mô tả: Lý do hủy hóa đơn
+- Property: PaymentStatus
+  - Type: int
+  - Format:
+  - Mô tả: Trạng thái thanh toán hóa đơn, xem tại đây[#paymentstatus-definition]
+- Property: AvailablePoint
+  - Type: int
+  - Format:
+  - Mô tả: Số điểm có trước khi thanh toán hóa đơn
+- Property: UsedPoint
+  - Type: int
+  - Format:
+  - Mô tả: Số điểm sử dụng trong hóa đơn
+- Property: AddPoint
+  - Type: int
+  - Format:
+  - Mô tả: Số điểm tích được trong hóa đơn
+- Property: SAInvoiceDetails
+  - Type: Array<InvoiceDetail>
+  - Format:
+  - Mô tả: Danh sách hàng hóa chi tiết trong hóa đơn
+- Property: SAInvoicePayments
+  - Type: Array<InvoicePayment>
+  - Format:
+  - Mô tả: Danh sách thông tin thanh toán của hóa đơn
+- Property: SAInvoiceCoupons
+  - Type: Array<InvoiceCoupon>
+  - Format:
+  - Mô tả: Danh sách các mã ưu đãi trong hóa đơn
+- Property: SAVATInfo
+  - Type: SAVATInfo
+  - Format:
+  - Mô tả: Thông tin phát hành hóa đơn GTGT
 
 ### OrderType Definition
 
-
-|Giá trị|Mô tả                        |
-|-------|-----------------------------|
-|1      |Đơn hàng phục vụ tại nhà hàng|
-|2      |Đơn hàng gói mang về         |
-|3      |Đơn hàng giao tận nơi        |
-|4      |Đặt chỗ trước                |
-
+| Giá trị | Mô tả                         |
+| ------- | ----------------------------- |
+| 1       | Đơn hàng phục vụ tại nhà hàng |
+| 2       | Đơn hàng gói mang về          |
+| 3       | Đơn hàng giao tận nơi         |
+| 4       | Đặt chỗ trước                 |
 
 ### PaymentStatus Definition
 
-
-|Giá trị|Mô tả          |
-|-------|---------------|
-|0      |Chưa thanh toán|
-|1      |Chưa thu tiền  |
-|2      |Ghi nợ         |
-|3      |Đã thu tiền    |
-|4      |Đã hủy         |
-|5      |Tạm hủy        |
-
+| Giá trị | Mô tả           |
+| ------- | --------------- |
+| 0       | Chưa thanh toán |
+| 1       | Chưa thu tiền   |
+| 2       | Ghi nợ          |
+| 3       | Đã thu tiền     |
+| 4       | Đã hủy          |
+| 5       | Tạm hủy         |
 
 ### InvoiceDetail Definition
 
-
-
-* Property: RefDetailId
-  * Type: string
-  * Format: guid
-  * Mô tả: Id detail hóa đơn
-* Property: RefID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id hóa đơn bán hàng
-* Property: RefDetailType
-  * Type: int
-  * Format: 
-  * Mô tả: Loại chi tiết, xem tại đây
-* Property: ItemID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id mặt hàng
-* Property: ItemName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên mặt hàng
-* Property: Quantity
-  * Type: decimal
-  * Format: 
-  * Mô tả: Số lượng
-* Property: UnitPrice
-  * Type: decimal
-  * Format: 
-  * Mô tả: Đơn giá
-* Property: UnitID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id đơn vị tính
-* Property: UnitName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên đơn vị tính
-* Property: Amount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Thành tiền
-* Property: DiscountRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tỷ lệ chiết khấu (tính theo %)
-* Property: Description
-  * Type: string
-  * Format: 
-  * Mô tả: Ghi chú
-* Property: SortOrder
-  * Type: int
-  * Format: 
-  * Mô tả: Thứ tự sắp xếp trong hóa đơn
-* Property: ParentID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id dòng cha
-* Property: InventoryItemAdditionID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id sở thích phục vụ
-* Property: InventoryItemType
-  * Type: int
-  * Format: 
-  * Mô tả: Loại mặt hàng, xem tại đây
-* Property: IsSeftPrice
-  * Type: bool
-  * Format: 
-  * Mô tả: Đơn giá thay đổi theo thời giá (true: có, false: không)
-* Property: PromotionRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tỷ lệ khuyến mại (tính theo %)
-* Property: PromotionType
-  * Type: int
-  * Format: 
-  * Mô tả: Loại khuyến mại, xem tại đây
-* Property: PromotionName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên khuyến mại
-* Property: OrderDetailID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id order detail
-* Property: SAInvoicePromotionAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền khuyến mại trên hóa đơn
-* Property: RefDate
-  * Type: datetime
-  * Format: 
-  * Mô tả: Ngày lập hóa đơn
-* Property: ItemCode
-  * Type: string
-  * Format: 
-  * Mô tả: Mã hàng
-* Property: PromotionAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền khuyến mại
-* Property: InventoryItemCategoryID
-  * Type: string
-  * Format: guid
-  * Mô tả: Mã nhóm vật tư hàng hóa
-* Property: AllocationAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Số tiền phân bổ của khuyến mại cho dòng chi tiết
-* Property: PreTaxAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền trước thuế của món
-* Property: TaxRate
-  * Type: decimal
-  * Format: 
-  * Mô tả: Thuế suất cho món (tính theo %)
-* Property: TaxAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Tiền thuế cho món
-* Property: AllocationDeliveryPromotionAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Phân bố chiết khấu giao hàng
-
+- Property: RefDetailId
+  - Type: string
+  - Format: guid
+  - Mô tả: Id detail hóa đơn
+- Property: RefID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id hóa đơn bán hàng
+- Property: RefDetailType
+  - Type: int
+  - Format:
+  - Mô tả: Loại chi tiết, xem tại đây
+- Property: ItemID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id mặt hàng
+- Property: ItemName
+  - Type: string
+  - Format:
+  - Mô tả: Tên mặt hàng
+- Property: Quantity
+  - Type: decimal
+  - Format:
+  - Mô tả: Số lượng
+- Property: UnitPrice
+  - Type: decimal
+  - Format:
+  - Mô tả: Đơn giá
+- Property: UnitID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id đơn vị tính
+- Property: UnitName
+  - Type: string
+  - Format:
+  - Mô tả: Tên đơn vị tính
+- Property: Amount
+  - Type: decimal
+  - Format:
+  - Mô tả: Thành tiền
+- Property: DiscountRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Tỷ lệ chiết khấu (tính theo %)
+- Property: Description
+  - Type: string
+  - Format:
+  - Mô tả: Ghi chú
+- Property: SortOrder
+  - Type: int
+  - Format:
+  - Mô tả: Thứ tự sắp xếp trong hóa đơn
+- Property: ParentID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id dòng cha
+- Property: InventoryItemAdditionID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id sở thích phục vụ
+- Property: InventoryItemType
+  - Type: int
+  - Format:
+  - Mô tả: Loại mặt hàng, xem tại đây
+- Property: IsSeftPrice
+  - Type: bool
+  - Format:
+  - Mô tả: Đơn giá thay đổi theo thời giá (true: có, false: không)
+- Property: PromotionRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Tỷ lệ khuyến mại (tính theo %)
+- Property: PromotionType
+  - Type: int
+  - Format:
+  - Mô tả: Loại khuyến mại, xem tại đây
+- Property: PromotionName
+  - Type: string
+  - Format:
+  - Mô tả: Tên khuyến mại
+- Property: OrderDetailID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id order detail
+- Property: SAInvoicePromotionAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền khuyến mại trên hóa đơn
+- Property: RefDate
+  - Type: datetime
+  - Format:
+  - Mô tả: Ngày lập hóa đơn
+- Property: ItemCode
+  - Type: string
+  - Format:
+  - Mô tả: Mã hàng
+- Property: PromotionAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền khuyến mại
+- Property: InventoryItemCategoryID
+  - Type: string
+  - Format: guid
+  - Mô tả: Mã nhóm vật tư hàng hóa
+- Property: AllocationAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Số tiền phân bổ của khuyến mại cho dòng chi tiết
+- Property: PreTaxAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền trước thuế của món
+- Property: TaxRate
+  - Type: decimal
+  - Format:
+  - Mô tả: Thuế suất cho món (tính theo %)
+- Property: TaxAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Tiền thuế cho món
+- Property: AllocationDeliveryPromotionAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Phân bố chiết khấu giao hàng
 
 ### InvoicePayment Definition
 
-
-|Property          |Type   |Format|Mô tả                            |
-|------------------|-------|------|---------------------------------|
-|SAInvoicePaymentID|string |guid  |Id thông tin tin thanh toán      |
-|RefID             |string |guid  |Id hóa đơn                       |
-|RefNo             |string |guid  |Số chứng từ của SAInvoice        |
-|PaymentType       |int    |      |Loại thanh toán, xem tại đây     |
-|Amount            |decimal|      |Số tiền                          |
-|CustomerID        |string |guid  |Id khách ghi nợ                  |
-|CustomerName      |string |      |Tên khách ghi nợ                 |
-|PaymentName       |string |      |Tên loại thanh toán              |
-|VoucherID         |string |guid  |Id thẻ voucher                   |
-|VoucherQuantity   |int    |      |Số lượng voucher                 |
-|VoucherAmount     |decimal|      |Giá trị của voucher              |
-|VoucherCode       |string |      |Mã voucher                       |
-|VoucherName       |string |      |Tên voucher                      |
-|CardID            |string |guid  |Id thẻ ngân hàng                 |
-|CardName          |string |      |Tên thẻ ngân hàng                |
-|ApplyVoucherType  |int    |      |Loại áp dụng voucher, xem tại đây|
-|VoucherAllAmount  |decimal|      |Số tiền khi áp dụng cho tất cả   |
-|VoucherFoodAmount |decimal|      |Số tiền khi chọn áp dụng món ăn  |
-|VoucherDrinkAmount|decimal|      |Số tiền khi chọn áp dụng đồ uống |
-|CardNo            |string |      |4 số cuối thẻ ATM                |
-|ApprovalCode      |string |      |Mã chuẩn chi                     |
-|CustomerAddress   |string |      |Địa chỉ khách hàng thanh toán    |
-|BankName          |string |      |Tên tài khoản ngân hàng          |
-|BankAccountNumber |string |      |Số tài khoản                     |
-|CurrencyID        |string |guid  |Id đồng tiền thanh toán          |
-|MainCurrency      |string |      |Đồng tiền chinh                  |
-|ExchangeRate      |decimal|      |Tỷ giá quy đổi                   |
-|ExchangeAmount    |decimal|      |Tiền quy đổi                     |
-
+| Property           | Type    | Format | Mô tả                             |
+| ------------------ | ------- | ------ | --------------------------------- |
+| SAInvoicePaymentID | string  | guid   | Id thông tin tin thanh toán       |
+| RefID              | string  | guid   | Id hóa đơn                        |
+| RefNo              | string  | guid   | Số chứng từ của SAInvoice         |
+| PaymentType        | int     |        | Loại thanh toán, xem tại đây      |
+| Amount             | decimal |        | Số tiền                           |
+| CustomerID         | string  | guid   | Id khách ghi nợ                   |
+| CustomerName       | string  |        | Tên khách ghi nợ                  |
+| PaymentName        | string  |        | Tên loại thanh toán               |
+| VoucherID          | string  | guid   | Id thẻ voucher                    |
+| VoucherQuantity    | int     |        | Số lượng voucher                  |
+| VoucherAmount      | decimal |        | Giá trị của voucher               |
+| VoucherCode        | string  |        | Mã voucher                        |
+| VoucherName        | string  |        | Tên voucher                       |
+| CardID             | string  | guid   | Id thẻ ngân hàng                  |
+| CardName           | string  |        | Tên thẻ ngân hàng                 |
+| ApplyVoucherType   | int     |        | Loại áp dụng voucher, xem tại đây |
+| VoucherAllAmount   | decimal |        | Số tiền khi áp dụng cho tất cả    |
+| VoucherFoodAmount  | decimal |        | Số tiền khi chọn áp dụng món ăn   |
+| VoucherDrinkAmount | decimal |        | Số tiền khi chọn áp dụng đồ uống  |
+| CardNo             | string  |        | 4 số cuối thẻ ATM                 |
+| ApprovalCode       | string  |        | Mã chuẩn chi                      |
+| CustomerAddress    | string  |        | Địa chỉ khách hàng thanh toán     |
+| BankName           | string  |        | Tên tài khoản ngân hàng           |
+| BankAccountNumber  | string  |        | Số tài khoản                      |
+| CurrencyID         | string  | guid   | Id đồng tiền thanh toán           |
+| MainCurrency       | string  |        | Đồng tiền chinh                   |
+| ExchangeRate       | decimal |        | Tỷ giá quy đổi                    |
+| ExchangeAmount     | decimal |        | Tiền quy đổi                      |
 
 ### InvoiceCoupon Definition
 
-
-
-* Property: SAInvoiceCouponID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id mã ưu đãi trong hóa đơn
-* Property: RefID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id hóa đơn
-* Property: CouponID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id mã ưu đãi
-* Property: CouponCode
-  * Type: string
-  * Format: 
-  * Mô tả: Mã ưu đãi
-* Property: DiscountType
-  * Type: int
-  * Format: 
-  * Mô tả: Loại ưu đãi (1: theo phần trăm, 2: theo số tiền)
-* Property: DiscountPercent
-  * Type: decimal
-  * Format: 
-  * Mô tả: Phần trăm giảm giá
-* Property: DiscountAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Số tiền giảm giá
-* Property: ApplyFromDate
-  * Type: datetime
-  * Format: 
-  * Mô tả: Áp dụng từ ngày
-* Property: ApplyToDate
-  * Type: datetime
-  * Format: 
-  * Mô tả: Áp dụng đến ngày
-* Property: ApplyCondition
-  * Type: string
-  * Format: 
-  * Mô tả: Điều kiện áp dụng
-* Property: IsUnlimitedApply
-  * Type: bool
-  * Format: 
-  * Mô tả: Không giới hạn số lần áp dụng (true: không giới hạn, false: giới hạn số lần áp dụng)
-* Property: ApplyFor
-  * Type: string
-  * Format: 
-  * Mô tả: Áp dụng cho
-* Property: InvoiceDiscountAmount
-  * Type: decimal
-  * Format: 
-  * Mô tả: Số tiền khuyến mại hóa đơn
-
+- Property: SAInvoiceCouponID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id mã ưu đãi trong hóa đơn
+- Property: RefID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id hóa đơn
+- Property: CouponID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id mã ưu đãi
+- Property: CouponCode
+  - Type: string
+  - Format:
+  - Mô tả: Mã ưu đãi
+- Property: DiscountType
+  - Type: int
+  - Format:
+  - Mô tả: Loại ưu đãi (1: theo phần trăm, 2: theo số tiền)
+- Property: DiscountPercent
+  - Type: decimal
+  - Format:
+  - Mô tả: Phần trăm giảm giá
+- Property: DiscountAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Số tiền giảm giá
+- Property: ApplyFromDate
+  - Type: datetime
+  - Format:
+  - Mô tả: Áp dụng từ ngày
+- Property: ApplyToDate
+  - Type: datetime
+  - Format:
+  - Mô tả: Áp dụng đến ngày
+- Property: ApplyCondition
+  - Type: string
+  - Format:
+  - Mô tả: Điều kiện áp dụng
+- Property: IsUnlimitedApply
+  - Type: bool
+  - Format:
+  - Mô tả: Không giới hạn số lần áp dụng (true: không giới hạn, false: giới hạn số lần áp dụng)
+- Property: ApplyFor
+  - Type: string
+  - Format:
+  - Mô tả: Áp dụng cho
+- Property: InvoiceDiscountAmount
+  - Type: decimal
+  - Format:
+  - Mô tả: Số tiền khuyến mại hóa đơn
 
 ### SAVATInfo Definition
 
-
-
-* Property: VATID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id hóa đơn điện tử
-* Property: RefID
-  * Type: string
-  * Format: guid
-  * Mô tả: Id hóa đơn bán hàng
-* Property: ReceiverEIvoiceName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên khách hàng
-* Property: Tel
-  * Type: string
-  * Format: 
-  * Mô tả: Số điện thoại
-* Property: CompanyName
-  * Type: string
-  * Format: 
-  * Mô tả: Tên công ty
-* Property: CompanyAddress
-  * Type: string
-  * Format: 
-  * Mô tả: Địa chỉ công ty
-* Property: TaxCode
-  * Type: string
-  * Format: 
-  * Mô tả: Mã số thuế
-* Property: Email
-  * Type: string
-  * Format: 
-  * Mô tả: Email người nhận hóa đơn
-* Property: Status
-  * Type: bool
-  * Format: 
-  * Mô tả: Khách có lấy hóa đơn giá trị gia tăng
-* Property: StatusReleaseEInvoice
-  * Type: int
-  * Format: 
-  * Mô tả: Trạng thái phát hành hóa đơn ,xem tại đây
-* Property: EInvoiceNumber
-  * Type: string
-  * Format: 
-  * Mô tả: Số hóa đơn khi phát hành hóa đơn điện tử
-* Property: StatusSendEmail
-  * Type: int
-  * Format: 
-  * Mô tả: Trạng thái gửi email cho khách hàng (0: chưa gửi, 1: đã gửi)
-* Property: TransactionID
-  * Type: string
-  * Format: 
-  * Mô tả: Transaction phát hành hóa đơn điện tử
-* Property: SellerTaxCode
-  * Type: string
-  * Format: 
-  * Mô tả: Mã số thuế tài khoản phát hành
-* Property: TemplateCode
-  * Type: string
-  * Format: 
-  * Mô tả: Mã mẫu số hóa đơn
-* Property: InvoiceSeries
-  * Type: string
-  * Format: 
-  * Mô tả: Ký hiệu của mẫu số hóa đơn
-* Property: RefDateReleaseEInvoice
-  * Type: datetime
-  * Format: 
-  * Mô tả: Ngày phát hành hóa đơn
-* Property: StatusSendToTax
-  * Type: int?
-  * Format: 
-  * Mô tả: Trạng thái gửi cơ quan thuế, xem tại đây
-* Property: AccountObjectIdentificationNumber
-  * Type: string
-  * Format: 
-  * Mô tả: Số cmnd/cccd
-* Property: IsCalculatingMachinePublishing
-  * Type: bool?
-  * Format: 
-  * Mô tả: Phát hành dưới máy tính tiền
-* Property: ErrorNoteEinvoice
-  * Type: string
-  * Format: 
-  * Mô tả: Ghi chú sai sót
-
+- Property: VATID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id hóa đơn điện tử
+- Property: RefID
+  - Type: string
+  - Format: guid
+  - Mô tả: Id hóa đơn bán hàng
+- Property: ReceiverEIvoiceName
+  - Type: string
+  - Format:
+  - Mô tả: Tên khách hàng
+- Property: Tel
+  - Type: string
+  - Format:
+  - Mô tả: Số điện thoại
+- Property: CompanyName
+  - Type: string
+  - Format:
+  - Mô tả: Tên công ty
+- Property: CompanyAddress
+  - Type: string
+  - Format:
+  - Mô tả: Địa chỉ công ty
+- Property: TaxCode
+  - Type: string
+  - Format:
+  - Mô tả: Mã số thuế
+- Property: Email
+  - Type: string
+  - Format:
+  - Mô tả: Email người nhận hóa đơn
+- Property: Status
+  - Type: bool
+  - Format:
+  - Mô tả: Khách có lấy hóa đơn giá trị gia tăng
+- Property: StatusReleaseEInvoice
+  - Type: int
+  - Format:
+  - Mô tả: Trạng thái phát hành hóa đơn ,xem tại đây
+- Property: EInvoiceNumber
+  - Type: string
+  - Format:
+  - Mô tả: Số hóa đơn khi phát hành hóa đơn điện tử
+- Property: StatusSendEmail
+  - Type: int
+  - Format:
+  - Mô tả: Trạng thái gửi email cho khách hàng (0: chưa gửi, 1: đã gửi)
+- Property: TransactionID
+  - Type: string
+  - Format:
+  - Mô tả: Transaction phát hành hóa đơn điện tử
+- Property: SellerTaxCode
+  - Type: string
+  - Format:
+  - Mô tả: Mã số thuế tài khoản phát hành
+- Property: TemplateCode
+  - Type: string
+  - Format:
+  - Mô tả: Mã mẫu số hóa đơn
+- Property: InvoiceSeries
+  - Type: string
+  - Format:
+  - Mô tả: Ký hiệu của mẫu số hóa đơn
+- Property: RefDateReleaseEInvoice
+  - Type: datetime
+  - Format:
+  - Mô tả: Ngày phát hành hóa đơn
+- Property: StatusSendToTax
+  - Type: int?
+  - Format:
+  - Mô tả: Trạng thái gửi cơ quan thuế, xem tại đây
+- Property: AccountObjectIdentificationNumber
+  - Type: string
+  - Format:
+  - Mô tả: Số cmnd/cccd
+- Property: IsCalculatingMachinePublishing
+  - Type: bool?
+  - Format:
+  - Mô tả: Phát hành dưới máy tính tiền
+- Property: ErrorNoteEinvoice
+  - Type: string
+  - Format:
+  - Mô tả: Ghi chú sai sót
 
 ### RefDetailType Definition
 
-
-|Giá trị|Mô tả                 |
-|-------|----------------------|
-|1      |Món ăn                |
-|2      |Món ăn thêm           |
-|3      |Mặt hàng khác         |
-|4      |Khuyến mại theo món ăn|
-
+| Giá trị | Mô tả                  |
+| ------- | ---------------------- |
+| 1       | Món ăn                 |
+| 2       | Món ăn thêm            |
+| 3       | Mặt hàng khác          |
+| 4       | Khuyến mại theo món ăn |
 
 ### PromotionType Definition
 
-
-|Giá trị|Mô tả                       |
-|-------|----------------------------|
-|1      |Theo chương trình khuyến mại|
-|2      |Món mời                     |
-|3      |Khuyến mại khác             |
-
+| Giá trị | Mô tả                        |
+| ------- | ---------------------------- |
+| 1       | Theo chương trình khuyến mại |
+| 2       | Món mời                      |
+| 3       | Khuyến mại khác              |
 
 ### PaymentType Definition
 
-
-|Giá trị|Mô tả          |
-|-------|---------------|
-|1      |Tiền mặt       |
-|2      |Thẻ ATM        |
-|3      |Thẻ VISA       |
-|4      |Thẻ Master Card|
-|5      |Ghi nợ         |
-|6      |Thẻ voucher    |
-|7      |Thẻ trả trước  |
-
+| Giá trị | Mô tả           |
+| ------- | --------------- |
+| 1       | Tiền mặt        |
+| 2       | Thẻ ATM         |
+| 3       | Thẻ VISA        |
+| 4       | Thẻ Master Card |
+| 5       | Ghi nợ          |
+| 6       | Thẻ voucher     |
+| 7       | Thẻ trả trước   |
 
 ### ApplyVoucherType Definition
 
-
-|Giá trị|Mô tả   |
-|-------|--------|
-|1      |Tất cả  |
-|2      |Món ăn  |
-|3      |Đồ uống |
-|4      |Tùy chọn|
-
+| Giá trị | Mô tả    |
+| ------- | -------- |
+| 1       | Tất cả   |
+| 2       | Món ăn   |
+| 3       | Đồ uống  |
+| 4       | Tùy chọn |
 
 ### InventoryItemType Definition
 
-
-|Giá trị|Mô tả                      |
-|-------|---------------------------|
-|1      |Món ăn                     |
-|2      |Món ăn theo nguyên vật liệu|
-|3      |Món ăn theo nhóm           |
-|4      |Combo                      |
-|5      |Đồ uống đóng chai          |
-|6      |Đồ uống pha chế            |
-|7      |Mặt hàng khác              |
-|8      |Nguyên vật liệu            |
-|10     |Đồ uống theo nhóm          |
-
+| Giá trị | Mô tả                       |
+| ------- | --------------------------- |
+| 1       | Món ăn                      |
+| 2       | Món ăn theo nguyên vật liệu |
+| 3       | Món ăn theo nhóm            |
+| 4       | Combo                       |
+| 5       | Đồ uống đóng chai           |
+| 6       | Đồ uống pha chế             |
+| 7       | Mặt hàng khác               |
+| 8       | Nguyên vật liệu             |
+| 10      | Đồ uống theo nhóm           |
 
 ### ServiceResult Definition
 
-
-|Property    |Type  |Format|Mô tả                                     |
-|------------|------|------|------------------------------------------|
-|Code        |int   |      |Mã lỗi HttpCode (200, 500...)             |
-|ErrorType   |int   |      |Loại lỗi                                  |
-|ErrorMessage|string|      |Thông tin lỗi                             |
-|Success     |bool  |      |True - không có lỗi logic xảy ra          |
-|Environment |string|      |Môi trường triển khai của api             |
-|Data        |string|object|Dữ liệu trả về client                     |
-|Total       |int   |      |Tổng số bản ghi khi lấy dữ liệu phân trang|
-
+| Property     | Type   | Format | Mô tả                                      |
+| ------------ | ------ | ------ | ------------------------------------------ |
+| Code         | int    |        | Mã lỗi HttpCode (200, 500...)              |
+| ErrorType    | int    |        | Loại lỗi                                   |
+| ErrorMessage | string |        | Thông tin lỗi                              |
+| Success      | bool   |        | True - không có lỗi logic xảy ra           |
+| Environment  | string |        | Môi trường triển khai của api              |
+| Data         | string | object | Dữ liệu trả về client                      |
+| Total        | int    |        | Tổng số bản ghi khi lấy dữ liệu phân trang |
 
 ### StatusReleaseEInvoice Definition
 
-*   Trạng thái phát hành
+- Trạng thái phát hành
 
-
-|Giá trị|Mô tả         |
-|-------|--------------|
-|1      |Đã phát hành  |
-|-1     |Phát hành lỗi |
-|0      |Đang phát hành|
-|-2     |Chưa phát hành|
-|2      |Chờ cấp mã    |
-|3      |Gửi lỗi       |
-|4      |Đã cấp mã     |
-|5      |Từ chối cấp mã|
-
+| Giá trị | Mô tả          |
+| ------- | -------------- |
+| 1       | Đã phát hành   |
+| -1      | Phát hành lỗi  |
+| 0       | Đang phát hành |
+| -2      | Chưa phát hành |
+| 2       | Chờ cấp mã     |
+| 3       | Gửi lỗi        |
+| 4       | Đã cấp mã      |
+| 5       | Từ chối cấp mã |
 
 ### StatusSendToTax Definition
 
-*   Trạng thái gửi cơ quan thuế
+- Trạng thái gửi cơ quan thuế
 
-
-|Giá trị|Mô tả              |
-|-------|-------------------|
-|0      |Chưa gửi           |
-|1      |Đã gửi             |
-|2      |CQT tiếp nhận      |
-|3      |CQT không tiếp nhận|
-|4      |Gửi lỗi            |
-
+| Giá trị | Mô tả               |
+| ------- | ------------------- |
+| 0       | Chưa gửi            |
+| 1       | Đã gửi              |
+| 2       | CQT tiếp nhận       |
+| 3       | CQT không tiếp nhận |
+| 4       | Gửi lỗi             |
 
 ### ErrorType Definition
 
-*   Dải mã lỗi chung
+- Dải mã lỗi chung
 
+- HttpCode: 401
+  - ServiceResult.ErrorType:
+  - Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 0
+  - Mô tả: Không có lỗi
+- HttpCode: 200
+  - ServiceResult.ErrorType: 1
+  - Mô tả: Tham số không hợp lệ null or empty
+- HttpCode: 200
+  - ServiceResult.ErrorType: 2
+  - Mô tả: Mã nhà hàng không tồn tại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 3
+  - Mô tả: Mã Appid không tồn tại trên hệ thống
+- HttpCode: 200
+  - ServiceResult.ErrorType: 4
+  - Mô tả: Chuỗi thông tin chữ ký đăng nhập không hợp lệ, timeout
+- HttpCode: 200
+  - ServiceResult.ErrorType: 5
+  - Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 6
+  - Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
+- HttpCode: 200
 
+  - ServiceResult.ErrorType: 7
+  - Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
 
-* HttpCode: 401
-  * ServiceResult.ErrorType: 
-  * Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 0
-  * Mô tả: Không có lỗi
-* HttpCode: 200
-  * ServiceResult.ErrorType: 1
-  * Mô tả: Tham số không hợp lệ null or empty
-* HttpCode: 200
-  * ServiceResult.ErrorType: 2
-  * Mô tả: Mã nhà hàng không tồn tại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 3
-  * Mô tả: Mã Appid không tồn tại trên hệ thống
-* HttpCode: 200
-  * ServiceResult.ErrorType: 4
-  * Mô tả: Chuỗi thông tin chữ ký đăng nhập không hợp lệ, timeout
-* HttpCode: 200
-  * ServiceResult.ErrorType: 5
-  * Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 6
-  * Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 7
-  * Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
+- Dải mã lỗi nghiêm trọng
 
-
-*   Dải mã lỗi nghiêm trọng
-
-
-
-* HttpCode: 200
-  * ServiceResult.ErrorType: 100
-  * Mô tả: Lỗi nội bộ API Graph
-* HttpCode: 200
-  * ServiceResult.ErrorType: 102
-  * Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.  Ví dụ: Khi đang gọi api login mà api chưa trả về dữ liệu lại tiếp tục gọi request login này sẽ trả về lỗi này.
+- HttpCode: 200
+  - ServiceResult.ErrorType: 100
+  - Mô tả: Lỗi nội bộ API Graph
+- HttpCode: 200
+  - ServiceResult.ErrorType: 102
+  - Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại. Ví dụ: Khi đang gọi api login mà api chưa trả về dữ liệu lại tiếp tục gọi request login này sẽ trả về lỗi này.

@@ -16,95 +16,102 @@ Before using the OrderOnlines API, ensure you have:
 ## API Overview
 
 ### OrderOnlines Create API
+
 - **Endpoint**: `POST https://graphapi.cukcuk.vn/api/v1/order-onlines/create`
 - **Purpose**: Creates an online order and syncs it with the CukCuk PC system.
 - **Version**: 1.0.
 
 ### CreateOrderOnlineRequestParam Object
+
 The request body contains a `CreateOrderOnlineRequestParam` object with the following properties:
 
-| Property         | Type    | Required? | Description                              |
-|------------------|---------|-----------|------------------------------------------|
-| `BranchId`       | string  | Yes       | Branch ID (GUID) where the order is placed. |
-| `OrderId`        | string  | No        | Order ID (GUID), auto-generated if empty. |
-| `OrderCode`      | string  | No        | Order code, auto-generated if empty.      |
-| `OrderType`      | number  | Yes       | Order type (0: delivery, 1: pickup).      |
-| `CustomerId`     | string  | No        | Customer ID (GUID) from the Customer API. |
-| `CustomerName`   | string  | No        | Customer name, required if `CustomerId` is absent. |
-| `CustomerTel`    | string  | No        | Customer phone number, required if `CustomerId` is absent. |
-| `CustomerEmail`  | string  | No        | Customer email address.                  |
-| `ShippingAddress`| string  | No        | Delivery address, required for `OrderType: 0`. |
-| `ShippingDueDate`| datetime| No        | Expected delivery/pickup time, defaults to 30 minutes from now if empty. |
-| `ShippingTimeType` | number| No        | Time type (0: immediate, 1: scheduled).   |
-| `OrderNote`      | string  | No        | Order notes.                             |
-| `TotalAmount`    | number  | No        | Total order amount (calculated as per formula). |
-| `Amount`         | number  | No        | Total item amount (restaurant-calculated). |
-| `TaxAmount`      | number  | No        | Tax amount (calculated as per formula).   |
-| `DiscountAmount` | number  | No        | Discount amount (currently unsupported via API). |
-| `DeliveryAmount` | number  | No        | Delivery fee (if applicable).             |
-| `DepositAmount`  | number  | No        | Deposit amount from customer.             |
-| `PaymentStatus`  | number  | Yes       | Payment status (1: unpaid, 2: paid).      |
-| `OrderSource`    | number  | Yes       | Order source (1: restaurant website, 2: restaurant app). |
-| `OrderItems`     | Array   | Yes       | List of order items (fetched from Inventory APIs). |
+| Property           | Type     | Required? | Description                                                              |
+| ------------------ | -------- | --------- | ------------------------------------------------------------------------ |
+| `BranchId`         | string   | Yes       | Branch ID (GUID) where the order is placed.                              |
+| `OrderId`          | string   | No        | Order ID (GUID), auto-generated if empty.                                |
+| `OrderCode`        | string   | No        | Order code, auto-generated if empty.                                     |
+| `OrderType`        | number   | Yes       | Order type (0: delivery, 1: pickup).                                     |
+| `CustomerId`       | string   | No        | Customer ID (GUID) from the Customer API.                                |
+| `CustomerName`     | string   | No        | Customer name, required if `CustomerId` is absent.                       |
+| `CustomerTel`      | string   | No        | Customer phone number, required if `CustomerId` is absent.               |
+| `CustomerEmail`    | string   | No        | Customer email address.                                                  |
+| `ShippingAddress`  | string   | No        | Delivery address, required for `OrderType: 0`.                           |
+| `ShippingDueDate`  | datetime | No        | Expected delivery/pickup time, defaults to 30 minutes from now if empty. |
+| `ShippingTimeType` | number   | No        | Time type (0: immediate, 1: scheduled).                                  |
+| `OrderNote`        | string   | No        | Order notes.                                                             |
+| `TotalAmount`      | number   | No        | Total order amount (calculated as per formula).                          |
+| `Amount`           | number   | No        | Total item amount (restaurant-calculated).                               |
+| `TaxAmount`        | number   | No        | Tax amount (calculated as per formula).                                  |
+| `DiscountAmount`   | number   | No        | Discount amount (currently unsupported via API).                         |
+| `DeliveryAmount`   | number   | No        | Delivery fee (if applicable).                                            |
+| `DepositAmount`    | number   | No        | Deposit amount from customer.                                            |
+| `PaymentStatus`    | number   | Yes       | Payment status (1: unpaid, 2: paid).                                     |
+| `OrderSource`      | number   | Yes       | Order source (1: restaurant website, 2: restaurant app).                 |
+| `OrderItems`       | Array    | Yes       | List of order items (fetched from Inventory APIs).                       |
 
 ### OrderItem Object
+
 Each item in the `OrderItems` array has the following properties:
 
-| Property    | Type    | Required? | Description                              |
-|-------------|---------|-----------|------------------------------------------|
-| `Id`        | string  | Yes       | Item ID (GUID).                          |
-| `Code`      | string  | Yes       | Item code.                               |
-| `ItemType`  | number  | Yes       | Item type (see [Item Types](#item-types)). |
-| `Name`      | string  | Yes       | Item name.                               |
-| `Price`     | number  | Yes       | Unit price.                              |
-| `UnitID`    | string  | Yes       | Unit ID (GUID).                          |
-| `UnitName`  | string  | Yes       | Unit name.                               |
-| `Note`      | string  | No        | Item note.                               |
-| `Quantity`  | number  | Yes       | Item quantity.                           |
-| `Children`  | Array   | No        | Sub-items for ingredient-based or combo items (Array<OrderItem>). |
-| `Additions` | Array   | No        | Selected serving preferences (Array<InventoryItemAddition>). |
+| Property    | Type   | Required? | Description                                                       |
+| ----------- | ------ | --------- | ----------------------------------------------------------------- |
+| `Id`        | string | Yes       | Item ID (GUID).                                                   |
+| `Code`      | string | Yes       | Item code.                                                        |
+| `ItemType`  | number | Yes       | Item type (see [Item Types](#item-types)).                        |
+| `Name`      | string | Yes       | Item name.                                                        |
+| `Price`     | number | Yes       | Unit price.                                                       |
+| `UnitID`    | string | Yes       | Unit ID (GUID).                                                   |
+| `UnitName`  | string | Yes       | Unit name.                                                        |
+| `Note`      | string | No        | Item note.                                                        |
+| `Quantity`  | number | Yes       | Item quantity.                                                    |
+| `Children`  | Array  | No        | Sub-items for ingredient-based or combo items (Array<OrderItem>). |
+| `Additions` | Array  | No        | Selected serving preferences (Array<InventoryItemAddition>).      |
 
 ### InventoryItemAddition Object
+
 Each addition in the `Additions` array has the following properties:
 
-| Property     | Type   | Required? | Description                              |
-|--------------|--------|-----------|------------------------------------------|
-| `Id`         | string | Yes       | Addition ID (GUID).                      |
-| `Description`| string | Yes       | Addition name (e.g., "Ít đường").        |
-| `Price`      | number | Yes       | Additional price.                        |
-| `Quantity`   | number | Yes       | Quantity of the addition.                |
+| Property      | Type   | Required? | Description                       |
+| ------------- | ------ | --------- | --------------------------------- |
+| `Id`          | string | Yes       | Addition ID (GUID).               |
+| `Description` | string | Yes       | Addition name (e.g., "Ít đường"). |
+| `Price`       | number | Yes       | Additional price.                 |
+| `Quantity`    | number | Yes       | Quantity of the addition.         |
 
 ### Item Types
+
 The `ItemType` field indicates the type of item:
 
-| Value | Type                  |
-|-------|-----------------------|
-| 1     | Dish                  |
-| 2     | Dish by ingredient    |
-| 3     | Dish by group         |
-| 4     | Combo                 |
-| 5     | Bottled drink         |
-| 6     | Prepared drink        |
-| 7     | Other item            |
-| 8     | Raw material          |
-| 10    | Drink by group        |
-| 12    | Customizable combo    |
+| Value | Type               |
+| ----- | ------------------ |
+| 1     | Dish               |
+| 2     | Dish by ingredient |
+| 3     | Dish by group      |
+| 4     | Combo              |
+| 5     | Bottled drink      |
+| 6     | Prepared drink     |
+| 7     | Other item         |
+| 8     | Raw material       |
+| 10    | Drink by group     |
+| 12    | Customizable combo |
 
 ### ServiceResult Object
+
 The API returns a `ServiceResult` object:
 
-| Property        | Type   | Description                          |
-|-----------------|--------|--------------------------------------|
-| `Code`          | number | HTTP status code (e.g., `200`, `401`). |
-| `ErrorType`     | number | Error type (see [Error Types](#error-types)). |
-| `ErrorMessage`  | string | Detailed error message, if any.      |
-| `Success`       | boolean| `true` if the request was successful, `false` otherwise. |
-| `Data`          | string | Generated `OrderCode` (e.g., "DH5678910"). |
-| `Total`         | number | Total number of records (typically `0`). |
+| Property       | Type    | Description                                              |
+| -------------- | ------- | -------------------------------------------------------- |
+| `Code`         | number  | HTTP status code (e.g., `200`, `401`).                   |
+| `ErrorType`    | number  | Error type (see [Error Types](#error-types)).            |
+| `ErrorMessage` | string  | Detailed error message, if any.                          |
+| `Success`      | boolean | `true` if the request was successful, `false` otherwise. |
+| `Data`         | string  | Generated `OrderCode` (e.g., "DH5678910").               |
+| `Total`        | number  | Total number of records (typically `0`).                 |
 
 ## Usage
 
 The `CukCukClient` provides a method to interact with the OrderOnlines API:
+
 - `orderOnlines.create`: Creates a new online order.
 
 Below is an example of how to use it.
@@ -129,13 +136,14 @@ async function createOnlineOrder() {
 
     // Create an online order
     const orderRequest = {
-      BranchId: "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       OrderId: "0FFDDFAD-3D07-4CB9-8021-96F970D7DE0F",
       OrderCode: "",
       OrderType: 0,
       CustomerName: "A Đặng",
       CustomerTel: "0389457123",
-      ShippingAddress: "Tòa N03-T1 khu Ngoại giao đoàn, Xuân Tảo, Bắc Từ Liêm, Hà Nội",
+      ShippingAddress:
+        "Tòa N03-T1 khu Ngoại giao đoàn, Xuân Tảo, Bắc Từ Liêm, Hà Nội",
       ShippingTimeType: 0,
       OrderNote: "Giao trước 18h",
       TotalAmount: 91000,
@@ -181,7 +189,9 @@ async function createOnlineOrder() {
     if (orderResponse.Success) {
       console.log("Order Created with Code:", orderResponse.Data);
     } else {
-      console.error(`Error ${orderResponse.ErrorType}: ${orderResponse.ErrorMessage}`);
+      console.error(
+        `Error ${orderResponse.ErrorType}: ${orderResponse.ErrorMessage}`
+      );
     }
   } catch (error) {
     console.error("Error creating order:", error.message);
@@ -195,17 +205,17 @@ createOnlineOrder();
 
 #### OrderOnlines Create API (`create`)
 
-| Parameter         | Type    | Description                              | Required? |
-|-------------------|---------|------------------------------------------|-----------|
-| `param`           | object  | `CreateOrderOnlineRequestParam` object.  | Yes       |
+| Parameter | Type   | Description                             | Required? |
+| --------- | ------ | --------------------------------------- | --------- |
+| `param`   | object | `CreateOrderOnlineRequestParam` object. | Yes       |
 
 ### Headers
 
 The API requires the following headers, automatically handled by the `CukCukClient`:
 
-| Header          | Description                          | Required? |
-|-----------------|--------------------------------------|-----------|
-| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`). | Yes       |
+| Header          | Description                                   | Required? |
+| --------------- | --------------------------------------------- | --------- |
+| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`).  | Yes       |
 | `CompanyCode`   | Merchant company code (e.g., `demoquanviet`). | Yes       |
 
 ### Example Response
@@ -223,8 +233,8 @@ The API requires the following headers, automatically handled by the `CukCukClie
 
 The API may return the following error types in the `ServiceResult.ErrorType` field:
 
-| ErrorType | HTTP Code | Description                                                                 |
-|-----------|-----------|-----------------------------------------------------------------------------|
+| ErrorType | HTTP Code | Description                                                                |
+| --------- | --------- | -------------------------------------------------------------------------- |
 | `0`       | 200       | No error.                                                                  |
 | `1`       | 200       | Invalid or missing parameters.                                             |
 | `2`       | 200       | The `CompanyCode` does not exist.                                          |
@@ -240,7 +250,7 @@ The API may return the following error types in the `ServiceResult.ErrorType` fi
 | `356`     | 200       | Missing customer phone number.                                             |
 | `357`     | 200       | Order code already exists.                                                 |
 | `400`     | 200       | Third-party orders not allowed (enable via CukCuk website settings).       |
-| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.  |
+| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API. |
 
 ### Handling Errors
 
@@ -256,11 +266,12 @@ async function createOrderWithErrorHandling() {
     });
 
     const orderRequest = {
-      BranchId: "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       OrderType: 0,
       CustomerName: "A Đặng",
       CustomerTel: "0389457123",
-      ShippingAddress: "Tòa N03-T1 khu Ngoại giao đoàn, Xuân Tảo, Bắc Từ Liêm, Hà Nội",
+      ShippingAddress:
+        "Tòa N03-T1 khu Ngoại giao đoàn, Xuân Tảo, Bắc Từ Liêm, Hà Nội",
       OrderSource: 1,
       OrderItems: [],
       PaymentStatus: 1,
@@ -270,7 +281,9 @@ async function createOrderWithErrorHandling() {
     if (orderResponse.Success) {
       console.log("Order Created with Code:", orderResponse.Data);
     } else {
-      console.error(`Error ${orderResponse.ErrorType}: ${orderResponse.ErrorMessage}`);
+      console.error(
+        `Error ${orderResponse.ErrorType}: ${orderResponse.ErrorMessage}`
+      );
     }
   } catch (error) {
     if (error.response?.status === 401) {

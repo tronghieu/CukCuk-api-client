@@ -60,7 +60,7 @@ async function fetchOrders() {
     const pagingParams = {
       Page: 1,
       Limit: 10,
-      BranchId: "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       LastSyncDate: "2020-05-04T09:28:55.854Z",
     };
 
@@ -95,7 +95,7 @@ async function createOrder() {
       Id: "832aea39-6b36-4473-8458-1396c4f36c75",
       Type: 3,
       No: "2.16",
-      BranchId: "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       Date: new Date().toISOString(),
       ShippingDate: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString(),
       CustomerId: "8dc32aa6-4d59-4a8f-96be-427ae6fee1b4",
@@ -177,7 +177,7 @@ async function updateOrderItems() {
 
     const updateData = {
       Id: "832aea39-6b36-4473-8458-1396c4f36c75",
-      BranchId: "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       OrderDetails: [
         {
           ItemId: "80F0FBFD-EA80-4857-BED6-75EBA359179A",
@@ -262,7 +262,7 @@ All APIs require the following headers, automatically handled by the `CukCukClie
       "Id": "cbfeea95-6996-4b86-9f7b-915b3217726f",
       "Type": 3,
       "No": "1.2",
-      "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       "Status": 4,
       "Date": "2020-07-29T11:06:16.837",
       "ShippingDate": "2020-07-29T11:36:05",
@@ -289,7 +289,7 @@ All APIs require the following headers, automatically handled by the `CukCukClie
     "Id": "832aea39-6b36-4473-8458-1396c4f36c75",
     "Type": 3,
     "No": "2.16",
-    "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+    "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
     "Status": 9,
     "Date": "2022-03-29T09:35:53.273+07:00",
     "ShippingDate": "2022-03-29T14:06:01.647+07:00",
@@ -322,7 +322,7 @@ All APIs require the following headers, automatically handled by the `CukCukClie
     "Id": "cbfeea95-6996-4b86-9f7b-915b3217726f",
     "Type": 3,
     "No": "1.2",
-    "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+    "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
     "Status": 4,
     "Date": "2020-07-29T11:06:16.837",
     "ShippingDate": "2020-07-29T11:36:05",
@@ -356,7 +356,7 @@ All APIs require the following headers, automatically handled by the `CukCukClie
     "Id": "832aea39-6b36-4473-8458-1396c4f36c75",
     "Type": 3,
     "No": "2.16",
-    "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+    "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
     "Status": 9,
     "Date": "2022-03-29T09:35:53.273+07:00",
     "ShippingDate": "2022-03-29T14:06:01.647+07:00",

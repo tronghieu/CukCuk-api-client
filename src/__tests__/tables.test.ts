@@ -39,7 +39,7 @@ describe('TablesApi', () => {
 
       jest.spyOn(client, 'makeRequest').mockResolvedValue(mockResponse);
 
-      const branchId = '994C6FE5-DA83-441B-A0E8-57A6FED98FB2';
+      const branchId = 'f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f';
       const response = await tablesApi.getByBranch(branchId);
 
       expect(response).toEqual(mockResponse);
@@ -87,7 +87,7 @@ describe('TablesApi', () => {
 
       jest.spyOn(client, 'makeRequest').mockResolvedValue(mockErrorResponse);
 
-      const branchId = '994C6FE5-DA83-441B-A0E8-57A6FED98FB2';
+      const branchId = 'f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f';
       const response = await tablesApi.getByBranch(branchId);
 
       expect(response.Code).toBe(401);

@@ -16,68 +16,74 @@ Before using the Inventory Items APIs, ensure you have:
 ## API Overview
 
 ### Inventory Items Paging API
+
 - **Endpoint**: `POST https://graphapi.cukcuk.vn/api/v1/inventoryitems/paging`
 - **Purpose**: Retrieves a paginated list of inventory items (menu items).
 - **Max Records**: 100 records per page.
 - **Version**: 1.0.
 
 ### Inventory Items Detail API
+
 - **Endpoint**: `GET https://graphapi.cukcuk.vn/api/v1/inventoryitems/detail/{inventoryItemId}`
 - **Purpose**: Fetches detailed information for a specific inventory item by its ID.
 - **Version**: 1.0.
 
 ### InventoryItem Object
+
 Each inventory item in the response has the following properties:
 
-| Property          | Type   | Description                              |
-|-------------------|--------|------------------------------------------|
-| `Id`              | string | Unique identifier (GUID) of the item.    |
-| `Code`            | string | Item code (e.g., `TRADA`).               |
-| `ItemType`        | number | Item type (see [Item Types](#item-types)). |
-| `Name`            | string | Item name (e.g., `Trà đá`).              |
-| `CategoryID`      | string | Category ID (GUID).                      |
-| `CategoryName`    | string | Category name (e.g., `Trà`).             |
-| `Price`           | number | Selling price (e.g., `2000.0`).          |
-| `Inactive`        | boolean| `true` if inactive, `false` if active.   |
-| `UnitId`          | string | Unit ID (GUID).                          |
-| `UnitName`        | string | Unit name (e.g., `Cốc`).                 |
-| `Description`     | string | Item description (optional).             |
-| `IsSeftPrice`     | boolean| `true` if price varies by market.        |
-| `AllowAdjustPrice`| boolean| `true` if price can be adjusted.         |
-| `Children`        | Array  | List of component items (Detail API only). |
-| `AdditionCategories` | Array  | List of serving preferences (Detail API only). |
+| Property             | Type    | Description                                    |
+| -------------------- | ------- | ---------------------------------------------- |
+| `Id`                 | string  | Unique identifier (GUID) of the item.          |
+| `Code`               | string  | Item code (e.g., `TRADA`).                     |
+| `ItemType`           | number  | Item type (see [Item Types](#item-types)).     |
+| `Name`               | string  | Item name (e.g., `Trà đá`).                    |
+| `CategoryID`         | string  | Category ID (GUID).                            |
+| `CategoryName`       | string  | Category name (e.g., `Trà`).                   |
+| `Price`              | number  | Selling price (e.g., `2000.0`).                |
+| `Inactive`           | boolean | `true` if inactive, `false` if active.         |
+| `UnitId`             | string  | Unit ID (GUID).                                |
+| `UnitName`           | string  | Unit name (e.g., `Cốc`).                       |
+| `Description`        | string  | Item description (optional).                   |
+| `IsSeftPrice`        | boolean | `true` if price varies by market.              |
+| `AllowAdjustPrice`   | boolean | `true` if price can be adjusted.               |
+| `Children`           | Array   | List of component items (Detail API only).     |
+| `AdditionCategories` | Array   | List of serving preferences (Detail API only). |
 
 ### Item Types
+
 The `ItemType` field indicates the type of inventory item:
 
-| Value | Type                  |
-|-------|-----------------------|
-| 1     | Dish                  |
-| 2     | Dish by ingredient    |
-| 3     | Dish by group         |
-| 4     | Combo                 |
-| 5     | Bottled drink         |
-| 6     | Prepared drink        |
-| 7     | Other item            |
-| 8     | Raw material          |
-| 10    | Drink by group        |
-| 12    | Customizable combo    |
+| Value | Type               |
+| ----- | ------------------ |
+| 1     | Dish               |
+| 2     | Dish by ingredient |
+| 3     | Dish by group      |
+| 4     | Combo              |
+| 5     | Bottled drink      |
+| 6     | Prepared drink     |
+| 7     | Other item         |
+| 8     | Raw material       |
+| 10    | Drink by group     |
+| 12    | Customizable combo |
 
 ### ServiceResult Object
+
 The API returns a `ServiceResult` object:
 
-| Property        | Type   | Description                          |
-|-----------------|--------|--------------------------------------|
-| `Code`          | number | HTTP status code (e.g., `200`, `401`). |
-| `ErrorType`     | number | Error type (see [Error Types](#error-types)). |
-| `ErrorMessage`  | string | Detailed error message, if any.      |
-| `Success`       | boolean| `true` if the request was successful, `false` otherwise. |
-| `Data`          | object | Inventory item(s) data.              |
-| `Total`         | number | Total number of records (for paging). |
+| Property       | Type    | Description                                              |
+| -------------- | ------- | -------------------------------------------------------- |
+| `Code`         | number  | HTTP status code (e.g., `200`, `401`).                   |
+| `ErrorType`    | number  | Error type (see [Error Types](#error-types)).            |
+| `ErrorMessage` | string  | Detailed error message, if any.                          |
+| `Success`      | boolean | `true` if the request was successful, `false` otherwise. |
+| `Data`         | object  | Inventory item(s) data.                                  |
+| `Total`        | number  | Total number of records (for paging).                    |
 
 ## Usage
 
 The `CukCukClient` provides methods to interact with these APIs:
+
 - `inventoryItems.getPaging`: Retrieves a paginated list of inventory items.
 - `inventoryItems.getDetail`: Fetches details for a specific inventory item.
 
@@ -105,7 +111,7 @@ async function fetchInventoryItems() {
     const pagingParams = {
       Page: 1,
       Limit: 10,
-      BranchId: "994C6FE5-DA83-441B-A0E8-57A6FED98FB2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       CategoryId: "",
       KeySearch: "Trà",
       IncludeInactive: true,
@@ -150,7 +156,9 @@ async function fetchItemDetails() {
     if (itemDetails.Success) {
       console.log("Item Details:", itemDetails.Data);
     } else {
-      console.error(`Error ${itemDetails.ErrorType}: ${itemDetails.ErrorMessage}`);
+      console.error(
+        `Error ${itemDetails.ErrorType}: ${itemDetails.ErrorMessage}`
+      );
     }
   } catch (error) {
     console.error("Error fetching item details:", error.message);
@@ -164,33 +172,34 @@ fetchItemDetails();
 
 #### Inventory Items Paging API (`getPaging`)
 
-| Parameter         | Type    | Description                              | Required? |
-|-------------------|---------|------------------------------------------|-----------|
-| `Page`            | number  | Page number to retrieve (default: 1).    | Yes       |
-| `Limit`           | number  | Number of records per page (max 100).    | Yes       |
-| `BranchId`        | string  | Branch ID (GUID) to filter; optional.    | No        |
-| `CategoryId`      | string  | Category ID (GUID) to filter; optional.  | No        |
-| `KeySearch`       | string  | Search keyword (e.g., `Trà`).            | No        |
-| `IncludeInactive` | boolean | `true` to include inactive items.        | No        |
+| Parameter         | Type    | Description                             | Required? |
+| ----------------- | ------- | --------------------------------------- | --------- |
+| `Page`            | number  | Page number to retrieve (default: 1).   | Yes       |
+| `Limit`           | number  | Number of records per page (max 100).   | Yes       |
+| `BranchId`        | string  | Branch ID (GUID) to filter; optional.   | No        |
+| `CategoryId`      | string  | Category ID (GUID) to filter; optional. | No        |
+| `KeySearch`       | string  | Search keyword (e.g., `Trà`).           | No        |
+| `IncludeInactive` | boolean | `true` to include inactive items.       | No        |
 
 #### Inventory Items Detail API (`getDetail`)
 
-| Parameter         | Type   | Description                              | Required? |
-|-------------------|--------|------------------------------------------|-----------|
-| `inventoryItemId` | string | Item ID (GUID) to retrieve.              | Yes       |
+| Parameter         | Type   | Description                 | Required? |
+| ----------------- | ------ | --------------------------- | --------- |
+| `inventoryItemId` | string | Item ID (GUID) to retrieve. | Yes       |
 
 ### Headers
 
 All APIs require the following headers, automatically handled by the `CukCukClient`:
 
-| Header          | Description                          | Required? |
-|-----------------|--------------------------------------|-----------|
-| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`). | Yes       |
+| Header          | Description                                   | Required? |
+| --------------- | --------------------------------------------- | --------- |
+| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`).  | Yes       |
 | `CompanyCode`   | Merchant company code (e.g., `demoquanviet`). | Yes       |
 
 ### Example Responses
 
 #### Inventory Items Paging API
+
 ```json
 {
   "Code": 200,
@@ -232,6 +241,7 @@ All APIs require the following headers, automatically handled by the `CukCukClie
 ```
 
 #### Inventory Items Detail API
+
 ```json
 {
   "Code": 200,
@@ -272,8 +282,8 @@ All APIs require the following headers, automatically handled by the `CukCukClie
 
 The APIs may return the following error types in the `ServiceResult.ErrorType` field:
 
-| ErrorType | HTTP Code | Description                                                                 |
-|-----------|-----------|-----------------------------------------------------------------------------|
+| ErrorType | HTTP Code | Description                                                                |
+| --------- | --------- | -------------------------------------------------------------------------- |
 | `0`       | 200       | No error.                                                                  |
 | `1`       | 200       | Invalid or missing parameters.                                             |
 | `2`       | 200       | The `CompanyCode` does not exist.                                          |
@@ -281,7 +291,7 @@ The APIs may return the following error types in the `ServiceResult.ErrorType` f
 | `7`       | 200       | CukCuk connection is disabled, unable to retrieve data.                    |
 | `100`     | 200       | Internal API error.                                                        |
 | `102`     | 200       | Request rejected due to a concurrent request of the same type.             |
-| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.  |
+| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API. |
 
 ### Handling Errors
 
@@ -299,7 +309,7 @@ async function fetchInventoryItemsWithErrorHandling() {
     const pagingParams = {
       Page: 1,
       Limit: 10,
-      BranchId: "994C6FE5-DA83-441B-A0E8-57A6FED98FB2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       CategoryId: "",
       KeySearch: "Trà",
       IncludeInactive: true,

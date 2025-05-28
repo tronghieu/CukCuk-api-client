@@ -16,7 +16,7 @@ describe('OrderOnlinesApi', () => {
   describe('create', () => {
     it('should create a new online order successfully', async () => {
       const mockParams: CreateOrderOnlineParams = {
-        BranchId: '994c6fe5-da83-441b-a0e8-57a6fed98fb2',
+        BranchId: 'f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f',
         OrderType: 0,
         CustomerName: 'A Đặng',
         CustomerTel: '0389457123',
@@ -74,7 +74,7 @@ describe('OrderOnlinesApi', () => {
 
     it('should handle API errors correctly', async () => {
       const mockParams: CreateOrderOnlineParams = {
-        BranchId: '994c6fe5-da83-441b-a0e8-57a6fed98fb2',
+        BranchId: 'f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f',
         OrderType: 0,
         OrderSource: 1,
         PaymentStatus: 1,

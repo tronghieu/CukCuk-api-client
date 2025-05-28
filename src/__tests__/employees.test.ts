@@ -23,7 +23,7 @@ describe('EmployeesApi', () => {
         Data: [
           {
             Id: '44d3af84-d86e-443a-a2bd-1a1f07472481',
-            BranchId: '994c6fe5-da83-441b-a0e8-57a6fed98fb2',
+            BranchId: 'f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f',
             Code: 'NV000003',
             FirstName: '',
             LastName: '',
@@ -48,7 +48,7 @@ describe('EmployeesApi', () => {
       const params = {
         Page: 1,
         Limit: 10,
-        BranchId: '994c6fe5-da83-441b-a0e8-57a6fed98fb2',
+        BranchId: 'f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f',
         LastSyncDate: '2020-05-04T09:28:55.854Z'
       };
 

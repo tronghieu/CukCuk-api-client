@@ -1,37 +1,29 @@
-# Tables API - Lấy danh sách các bàn theo chi nhánh | CUKCUK OpenPlatform API 
+# Tables API - Lấy danh sách các bàn theo chi nhánh | CUKCUK OpenPlatform API
+
 API lấy thông tin chi tiết các bàn trong khu vực theo chi nhánh
 
 Các thông tin cấu hình cần thiết:
 
-
-|Tên        |Mô tả               |
-|-----------|--------------------|
-|CompanyCode|Mã nhà hàng lấy     |
-|AccessToken|Chuỗi token xác thực|
-
+| Tên         | Mô tả                |
+| ----------- | -------------------- |
+| CompanyCode | Mã nhà hàng lấy      |
+| AccessToken | Chuỗi token xác thực |
 
 Để lấy các thông tin trên xem bài viết [account/login](index.html)
 
-About
------
+## About
 
+| URL                | Phiên bản | Thay đổi |
+| ------------------ | --------- | -------- |
+| graphapi.cukcuk.vn | 1.0       |          |
 
-|URL               |Phiên bản|Thay đổi|
-|------------------|---------|--------|
-|graphapi.cukcuk.vn|1.0      |        |
+## Schemes
 
+| Scheme |
+| ------ |
+| https  |
 
-Schemes
--------
-
-
-|Scheme|
-|------|
-|https |
-
-
-Endpoints
----------
+## Endpoints
 
 ### api/v1/tables/`{branchID}`
 
@@ -39,51 +31,44 @@ Endpoints
 
 ##### Expected Response Types
 
-
-
-* HttpCode: 401
-  * ServiceResult.ErrorType: 
-  * Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 0
-  * Mô tả: Không có lỗi
-* HttpCode: 200
-  * ServiceResult.ErrorType: 1
-  * Mô tả: Tham số không hợp lệ null or empty
-* HttpCode: 200
-  * ServiceResult.ErrorType: 2
-  * Mô tả: Mã nhà hàng không tồn tại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 5
-  * Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 6
-  * Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 7
-  * Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
-* HttpCode: 200
-  * ServiceResult.ErrorType: 100
-  * Mô tả: Lỗi nội bộ API Graph
-* HttpCode: 200
-  * ServiceResult.ErrorType: 102
-  * Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.
-
+- HttpCode: 401
+  - ServiceResult.ErrorType:
+  - Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 0
+  - Mô tả: Không có lỗi
+- HttpCode: 200
+  - ServiceResult.ErrorType: 1
+  - Mô tả: Tham số không hợp lệ null or empty
+- HttpCode: 200
+  - ServiceResult.ErrorType: 2
+  - Mô tả: Mã nhà hàng không tồn tại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 5
+  - Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 6
+  - Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 7
+  - Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
+- HttpCode: 200
+  - ServiceResult.ErrorType: 100
+  - Mô tả: Lỗi nội bộ API Graph
+- HttpCode: 200
+  - ServiceResult.ErrorType: 102
+  - Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.
 
 ##### Parameters
 
+| Name     | In  | Description  | Required? | Type   |
+| -------- | --- | ------------ | --------- | ------ |
+| branchID | uri | Id chi nhánh | true      | string |
 
-|Name    |In |Description |Required?|Type  |
-|--------|---|------------|---------|------|
-|branchID|uri|Id chi nhánh|true     |string|
-
-
-
-|Name         |In    |Description                                              |Required?|Type  |
-|-------------|------|---------------------------------------------------------|---------|------|
-|Authorization|header|Header key cấu hình AccessToken (dạng Bearer AccessToken)|true     |string|
-|CompanyCode  |header|Header key cấu hình mã nhà hàng CompanyCode              |true     |string|
-
+| Name          | In     | Description                                               | Required? | Type   |
+| ------------- | ------ | --------------------------------------------------------- | --------- | ------ |
+| Authorization | header | Header key cấu hình AccessToken (dạng Bearer AccessToken) | true      | string |
+| CompanyCode   | header | Header key cấu hình mã nhà hàng CompanyCode               | true      | string |
 
 Ví dụ:
 
@@ -93,22 +78,17 @@ Authorization: Bearer utFYFHGRrnz-JWVCViIjy4k3CtKWOJDBY6wvL5X_5k9jm14tLIP6qPgCXd
 
 ```
 
-
 ##### Content Types Produced
 
-
-|Produces        |
-|----------------|
-|application/json|
-
+| Produces         |
+| ---------------- |
+| application/json |
 
 ##### Content Types Consumed
 
-
-|Consumes        |
-|----------------|
-|application/json|
-
+| Consumes         |
+| ---------------- |
+| application/json |
 
 ##### Response
 
@@ -118,7 +98,7 @@ Trả về đối tượng [ServiceResult](#serviceresult-definition) với Serv
 
 Ví dụ gọi **GET** tới
 
-[https://graphapi.cukcuk2.misa.local/api/v1/tables/994C6FE5-DA83-441B-A0E8-57A6FED98FB2](https://graphapi.cukcuk2.misa.local/api/v1/tables/994C6FE5-DA83-441B-A0E8-57A6FED98FB2)
+[https://graphapi.cukcuk2.misa.local/api/v1/tables/f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f](https://graphapi.cukcuk2.misa.local/api/v1/tables/f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f)
 
 Hệ thống sẽ trả về [ServiceResult](#serviceresult-definition) với Data là [BranchTables](#branchtables-definition) chi tiết JSON response
 
@@ -297,98 +277,83 @@ Hệ thống sẽ trả về [ServiceResult](#serviceresult-definition) với Da
 
 ```
 
-
-Definitions
------------
+## Definitions
 
 ### BranchTables Definition
 
-
-
-* Property: ListTable
-  * Type: List<MapObject>
-  * Format: 
-  * Mô tả: Danh sách các bàn trong chi nhánh
-* Property: AllowMergeTable
-  * Type: Int
-  * Format: 
-  * Mô tả: Cho biết thiết lập có cho phép nhiều order trên 1 bàn của chi nhánh
-
+- Property: ListTable
+  - Type: List<MapObject>
+  - Format:
+  - Mô tả: Danh sách các bàn trong chi nhánh
+- Property: AllowMergeTable
+  - Type: Int
+  - Format:
+  - Mô tả: Cho biết thiết lập có cho phép nhiều order trên 1 bàn của chi nhánh
 
 ### MapObject Definition
 
-
-|Property     |Type  |Format|Mô tả                                                        |
-|-------------|------|------|-------------------------------------------------------------|
-|MapObjectID  |string|guid  |ID của bàn                                                   |
-|MapObjectName|string|      |Tên bàn                                                      |
-|AreaID       |String|guid  |ID của khu vực                                               |
-|AreaName     |String|      |Tên khu vực                                                  |
-|IsAvailable  |Bool  |      |Cờ cho biết bàn sẵn sàng phục vụ hay không (không có ai ngồi)|
-
+| Property      | Type   | Format | Mô tả                                                         |
+| ------------- | ------ | ------ | ------------------------------------------------------------- |
+| MapObjectID   | string | guid   | ID của bàn                                                    |
+| MapObjectName | string |        | Tên bàn                                                       |
+| AreaID        | String | guid   | ID của khu vực                                                |
+| AreaName      | String |        | Tên khu vực                                                   |
+| IsAvailable   | Bool   |        | Cờ cho biết bàn sẵn sàng phục vụ hay không (không có ai ngồi) |
 
 ### ServiceResult Definition
 
-
-|Property    |Type  |Format|Mô tả                                     |
-|------------|------|------|------------------------------------------|
-|Code        |int   |      |Mã lỗi HttpCode (200, 500...)             |
-|ErrorType   |int   |      |Loại lỗi                                  |
-|ErrorMessage|string|      |Thông tin lỗi                             |
-|Success     |bool  |      |True - không có lỗi logic xảy ra          |
-|Environment |string|      |Môi trường triển khai của api             |
-|Data        |string|object|Dữ liệu trả về client                     |
-|Total       |int   |      |Tổng số bản ghi khi lấy dữ liệu phân trang|
-
+| Property     | Type   | Format | Mô tả                                      |
+| ------------ | ------ | ------ | ------------------------------------------ |
+| Code         | int    |        | Mã lỗi HttpCode (200, 500...)              |
+| ErrorType    | int    |        | Loại lỗi                                   |
+| ErrorMessage | string |        | Thông tin lỗi                              |
+| Success      | bool   |        | True - không có lỗi logic xảy ra           |
+| Environment  | string |        | Môi trường triển khai của api              |
+| Data         | string | object | Dữ liệu trả về client                      |
+| Total        | int    |        | Tổng số bản ghi khi lấy dữ liệu phân trang |
 
 ### ErrorType Definition
 
-*   Dải mã lỗi chung
+- Dải mã lỗi chung
 
+- HttpCode: 401
+  - ServiceResult.ErrorType:
+  - Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 0
+  - Mô tả: Không có lỗi
+- HttpCode: 200
+  - ServiceResult.ErrorType: 1
+  - Mô tả: Tham số không hợp lệ null or empty
+- HttpCode: 200
+  - ServiceResult.ErrorType: 2
+  - Mô tả: Mã nhà hàng không tồn tại
+- HttpCode: 200
+  - ServiceResult.ErrorType: 3
+  - Mô tả: Mã Appid không tồn tại trên hệ thống
+- HttpCode: 200
+  - ServiceResult.ErrorType: 4
+  - Mô tả: Chuỗi thông tin chữ ký đăng nhập không hợp lệ, timeout
+- HttpCode: 200
+  - ServiceResult.ErrorType: 5
+  - Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
+- HttpCode: 200
+  - ServiceResult.ErrorType: 6
+  - Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
+- HttpCode: 200
 
+  - ServiceResult.ErrorType: 7
+  - Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
 
-* HttpCode: 401
-  * ServiceResult.ErrorType: 
-  * Mô tả: Chuỗi AccessToken hết hạn hoặc không hợp lệ cần phải gọi cấp phát lại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 0
-  * Mô tả: Không có lỗi
-* HttpCode: 200
-  * ServiceResult.ErrorType: 1
-  * Mô tả: Tham số không hợp lệ null or empty
-* HttpCode: 200
-  * ServiceResult.ErrorType: 2
-  * Mô tả: Mã nhà hàng không tồn tại
-* HttpCode: 200
-  * ServiceResult.ErrorType: 3
-  * Mô tả: Mã Appid không tồn tại trên hệ thống
-* HttpCode: 200
-  * ServiceResult.ErrorType: 4
-  * Mô tả: Chuỗi thông tin chữ ký đăng nhập không hợp lệ, timeout
-* HttpCode: 200
-  * ServiceResult.ErrorType: 5
-  * Mô tả: Tham số lấy phân trang vượt quá số lượng cấu hình cho phép (max 100)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 6
-  * Mô tả: Tham số ngày giờ không hợp lệ (01/01/1753 - 31/12/9999)
-* HttpCode: 200
-  * ServiceResult.ErrorType: 7
-  * Mô tả: Thiết lập kết nối CUKCUK đang ở trạng thái ngắt, không thể lấy dữ liệu
+- Dải mã lỗi nghiêm trọng
 
+- HttpCode: 200
+  - ServiceResult.ErrorType: 100
+  - Mô tả: Lỗi nội bộ API Graph
+- HttpCode: 200
+  - ServiceResult.ErrorType: 102
+  - Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại. Ví dụ: Khi đang gọi api login mà api chưa trả về dữ liệu lại tiếp tục gọi request login này sẽ trả về lỗi này.
 
-*   Dải mã lỗi nghiêm trọng
+## Note
 
-
-
-* HttpCode: 200
-  * ServiceResult.ErrorType: 100
-  * Mô tả: Lỗi nội bộ API Graph
-* HttpCode: 200
-  * ServiceResult.ErrorType: 102
-  * Mô tả: Request bị từ chối, do có request cùng loại đang xử lý. Vui lòng chờ xử lý xong hoặc chờ request đang xử lý timeout thì gọi lại.  Ví dụ: Khi đang gọi api login mà api chưa trả về dữ liệu lại tiếp tục gọi request login này sẽ trả về lỗi này.
-
-
-Note
-----
-
-*   Lưu ý: đối với nhà hàng mô hình Offline thì có thể xảy ra sai sót với trường trạng thái của bàn do cơ chế đồng bộ tại mô hình offline không theo thời gian thực mà theo thời gian hoạt động của nhà hàng.
+- Lưu ý: đối với nhà hàng mô hình Offline thì có thể xảy ra sai sót với trường trạng thái của bàn do cơ chế đồng bộ tại mô hình offline không theo thời gian thực mà theo thời gian hoạt động của nhà hàng.

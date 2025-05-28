@@ -16,46 +16,50 @@ Before using the Employees API, ensure you have:
 ## API Overview
 
 ### Employees Paging API
+
 - **Endpoint**: `POST https://graphapi.cukcuk.vn/api/v1/employees/paging`
 - **Purpose**: Retrieves a paginated list of employees.
 - **Max Records**: 100 records per page.
 - **Version**: 1.0.
 
 ### Employee Object
+
 Each employee in the response has the following properties:
 
-| Property      | Type   | Description                              |
-|---------------|--------|------------------------------------------|
-| `Id`          | string | Unique identifier (GUID) of the employee. |
-| `BranchId`    | string | Branch ID (GUID) associated with the employee. |
-| `Code`        | string | Employee code (e.g., `NV000003`).        |
-| `FirstName`   | string | Employee's first name.                   |
-| `LastName`    | string | Employee's last name.                    |
-| `FullName`    | string | Employee's full name.                    |
-| `Gender`      | number | Gender (0 - Female, 1 - Male).           |
-| `Mobile`      | string | Mobile phone number.                     |
-| `HomeTel`     | string | Home phone number.                       |
-| `Email`       | string | Email address.                           |
-| `IdentifyNumber` | string | ID number.                           |
-| `CurrentAddress` | string | Current address.                        |
-| `NativeAddress` | string | Native address (hometown).               |
-| `RoleCode`    | string | JSON array of role codes (e.g., `["Admin"]`). |
+| Property         | Type   | Description                                    |
+| ---------------- | ------ | ---------------------------------------------- |
+| `Id`             | string | Unique identifier (GUID) of the employee.      |
+| `BranchId`       | string | Branch ID (GUID) associated with the employee. |
+| `Code`           | string | Employee code (e.g., `NV000003`).              |
+| `FirstName`      | string | Employee's first name.                         |
+| `LastName`       | string | Employee's last name.                          |
+| `FullName`       | string | Employee's full name.                          |
+| `Gender`         | number | Gender (0 - Female, 1 - Male).                 |
+| `Mobile`         | string | Mobile phone number.                           |
+| `HomeTel`        | string | Home phone number.                             |
+| `Email`          | string | Email address.                                 |
+| `IdentifyNumber` | string | ID number.                                     |
+| `CurrentAddress` | string | Current address.                               |
+| `NativeAddress`  | string | Native address (hometown).                     |
+| `RoleCode`       | string | JSON array of role codes (e.g., `["Admin"]`).  |
 
 ### ServiceResult Object
+
 The API returns a `ServiceResult` object:
 
-| Property        | Type   | Description                          |
-|-----------------|--------|--------------------------------------|
-| `Code`          | number | HTTP status code (e.g., `200`, `401`). |
-| `ErrorType`     | number | Error type (see [Error Types](#error-types)). |
-| `ErrorMessage`  | string | Detailed error message, if any.      |
-| `Success`       | boolean| `true` if the request was successful, `false` otherwise. |
-| `Data`          | object | Array of `Employee` objects.         |
-| `Total`         | number | Total number of records.             |
+| Property       | Type    | Description                                              |
+| -------------- | ------- | -------------------------------------------------------- |
+| `Code`         | number  | HTTP status code (e.g., `200`, `401`).                   |
+| `ErrorType`    | number  | Error type (see [Error Types](#error-types)).            |
+| `ErrorMessage` | string  | Detailed error message, if any.                          |
+| `Success`      | boolean | `true` if the request was successful, `false` otherwise. |
+| `Data`         | object  | Array of `Employee` objects.                             |
+| `Total`        | number  | Total number of records.                                 |
 
 ## Usage
 
 The `CukCukClient` provides a method to interact with the Employees API:
+
 - `employees.getPaging`: Retrieves a paginated list of employees.
 
 Below is an example of how to use it.
@@ -82,7 +86,7 @@ async function fetchEmployees() {
     const pagingParams = {
       Page: 1,
       Limit: 10,
-      BranchId: "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       LastSyncDate: "2020-05-04T09:28:55.854Z",
     };
 
@@ -105,20 +109,20 @@ fetchEmployees();
 
 #### Employees Paging API (`getPaging`)
 
-| Parameter       | Type    | Description                              | Required? |
-|-----------------|---------|------------------------------------------|-----------|
-| `Page`          | number  | Page number to retrieve (default: 1).    | Yes       |
-| `Limit`         | number  | Number of records per page (max 100).    | Yes       |
-| `BranchId`      | string  | Branch ID (GUID) to filter; `null` for all branches. | No        |
-| `LastSyncDate`  | string  | Last synchronization date (ISO 8601).    | No        |
+| Parameter      | Type   | Description                                          | Required? |
+| -------------- | ------ | ---------------------------------------------------- | --------- |
+| `Page`         | number | Page number to retrieve (default: 1).                | Yes       |
+| `Limit`        | number | Number of records per page (max 100).                | Yes       |
+| `BranchId`     | string | Branch ID (GUID) to filter; `null` for all branches. | No        |
+| `LastSyncDate` | string | Last synchronization date (ISO 8601).                | No        |
 
 ### Headers
 
 The API requires the following headers, automatically handled by the `CukCukClient`:
 
-| Header          | Description                          | Required? |
-|-----------------|--------------------------------------|-----------|
-| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`). | Yes       |
+| Header          | Description                                   | Required? |
+| --------------- | --------------------------------------------- | --------- |
+| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`).  | Yes       |
 | `CompanyCode`   | Merchant company code (e.g., `demoquanviet`). | Yes       |
 
 ### Example Response
@@ -129,7 +133,7 @@ The API requires the following headers, automatically handled by the `CukCukClie
   "Data": [
     {
       "Id": "44d3af84-d86e-443a-a2bd-1a1f07472481",
-      "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       "Code": "NV000003",
       "FirstName": "",
       "LastName": "",
@@ -145,7 +149,7 @@ The API requires the following headers, automatically handled by the `CukCukClie
     },
     {
       "Id": "12c271ea-478c-4350-b55d-162d66208838",
-      "BranchId": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      "BranchId": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       "Code": "ntdung",
       "FirstName": "",
       "LastName": "Dung Nguyễn",
@@ -169,8 +173,8 @@ The API requires the following headers, automatically handled by the `CukCukClie
 
 The API may return the following error types in the `ServiceResult.ErrorType` field:
 
-| ErrorType | HTTP Code | Description                                                                 |
-|-----------|-----------|-----------------------------------------------------------------------------|
+| ErrorType | HTTP Code | Description                                                                |
+| --------- | --------- | -------------------------------------------------------------------------- |
 | `0`       | 200       | No error.                                                                  |
 | `1`       | 200       | Invalid or missing parameters.                                             |
 | `2`       | 200       | The `CompanyCode` does not exist.                                          |
@@ -178,7 +182,7 @@ The API may return the following error types in the `ServiceResult.ErrorType` fi
 | `7`       | 200       | CukCuk connection is disabled, unable to retrieve data.                    |
 | `100`     | 200       | Internal API error.                                                        |
 | `102`     | 200       | Request rejected due to a concurrent request of the same type.             |
-| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.  |
+| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API. |
 
 ### Handling Errors
 
@@ -196,7 +200,7 @@ async function fetchEmployeesWithErrorHandling() {
     const pagingParams = {
       Page: 1,
       Limit: 10,
-      BranchId: "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      BranchId: "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       LastSyncDate: "2020-05-04T09:28:55.854Z",
     };
 

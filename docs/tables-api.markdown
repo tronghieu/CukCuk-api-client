@@ -16,44 +16,49 @@ Before using the Tables API, ensure you have:
 ## API Overview
 
 ### Tables API
+
 - **Endpoint**: `GET https://graphapi.cukcuk.vn/api/v1/tables/{branchID}`
 - **Purpose**: Retrieves a list of tables for a specified branch, including their areas and availability.
 - **Version**: 1.0.
 
 ### BranchTables Object
+
 The response contains a `BranchTables` object with the following properties:
 
-| Property         | Type   | Description                              |
-|------------------|--------|------------------------------------------|
-| `ListTable`      | Array  | List of `MapObject` (tables) in the branch. |
-| `AllowMergeTable`| number | Indicates if multiple orders are allowed on one table (1 = allowed). |
+| Property          | Type   | Description                                                          |
+| ----------------- | ------ | -------------------------------------------------------------------- |
+| `ListTable`       | Array  | List of `MapObject` (tables) in the branch.                          |
+| `AllowMergeTable` | number | Indicates if multiple orders are allowed on one table (1 = allowed). |
 
 ### MapObject (Table) Object
+
 Each table in the `ListTable` array has the following properties:
 
-| Property        | Type   | Description                              |
-|-----------------|--------|------------------------------------------|
-| `MapObjectID`   | string | Unique identifier (GUID) of the table.   |
-| `MapObjectName` | string | Name of the table (e.g., `3.23`).        |
-| `AreaID`        | string | Area ID (GUID) where the table is located. |
-| `AreaName`      | string | Name of the area (e.g., `3.2`).          |
-| `IsAvailable`   | boolean| `true` if the table is available (no one seated), `false` otherwise. |
+| Property        | Type    | Description                                                          |
+| --------------- | ------- | -------------------------------------------------------------------- |
+| `MapObjectID`   | string  | Unique identifier (GUID) of the table.                               |
+| `MapObjectName` | string  | Name of the table (e.g., `3.23`).                                    |
+| `AreaID`        | string  | Area ID (GUID) where the table is located.                           |
+| `AreaName`      | string  | Name of the area (e.g., `3.2`).                                      |
+| `IsAvailable`   | boolean | `true` if the table is available (no one seated), `false` otherwise. |
 
 ### ServiceResult Object
+
 The API returns a `ServiceResult` object:
 
-| Property        | Type   | Description                          |
-|-----------------|--------|--------------------------------------|
-| `Code`          | number | HTTP status code (e.g., `200`, `401`). |
-| `ErrorType`     | number | Error type (see [Error Types](#error-types)). |
-| `ErrorMessage`  | string | Detailed error message, if any.      |
-| `Success`       | boolean| `true` if the request was successful, `false` otherwise. |
-| `Data`          | object | `BranchTables` object.               |
-| `Total`         | number | Total number of records (typically `0` for this API). |
+| Property       | Type    | Description                                              |
+| -------------- | ------- | -------------------------------------------------------- |
+| `Code`         | number  | HTTP status code (e.g., `200`, `401`).                   |
+| `ErrorType`    | number  | Error type (see [Error Types](#error-types)).            |
+| `ErrorMessage` | string  | Detailed error message, if any.                          |
+| `Success`      | boolean | `true` if the request was successful, `false` otherwise. |
+| `Data`         | object  | `BranchTables` object.                                   |
+| `Total`        | number  | Total number of records (typically `0` for this API).    |
 
 ## Usage
 
 The `CukCukClient` provides a method to interact with the Tables API:
+
 - `tables.getByBranch`: Retrieves the list of tables for a specific branch.
 
 Below is an example of how to use it.
@@ -77,13 +82,15 @@ async function fetchTables() {
     });
 
     // Fetch tables for a specific branch
-    const branchId = "994C6FE5-DA83-441B-A0E8-57A6FED98FB2";
+    const branchId = "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f";
     const tablesResponse = await client.tables.getByBranch(branchId);
     if (tablesResponse.Success) {
       console.log("Tables:", tablesResponse.Data.ListTable);
       console.log("Allow Merge Table:", tablesResponse.Data.AllowMergeTable);
     } else {
-      console.error(`Error ${tablesResponse.ErrorType}: ${tablesResponse.ErrorMessage}`);
+      console.error(
+        `Error ${tablesResponse.ErrorType}: ${tablesResponse.ErrorMessage}`
+      );
     }
   } catch (error) {
     console.error("Error fetching tables:", error.message);
@@ -98,16 +105,16 @@ fetchTables();
 #### Tables API (`getByBranch`)
 
 | Parameter  | Type   | Description                              | Required? |
-|------------|--------|------------------------------------------|-----------|
+| ---------- | ------ | ---------------------------------------- | --------- |
 | `branchId` | string | Branch ID (GUID) to retrieve tables for. | Yes       |
 
 ### Headers
 
 The API requires the following headers, automatically handled by the `CukCukClient`:
 
-| Header          | Description                          | Required? |
-|-----------------|--------------------------------------|-----------|
-| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`). | Yes       |
+| Header          | Description                                   | Required? |
+| --------------- | --------------------------------------------- | --------- |
+| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`).  | Yes       |
 | `CompanyCode`   | Merchant company code (e.g., `demoquanviet`). | Yes       |
 
 ### Example Response
@@ -150,8 +157,8 @@ The API requires the following headers, automatically handled by the `CukCukClie
 
 The API may return the following error types in the `ServiceResult.ErrorType` field:
 
-| ErrorType | HTTP Code | Description                                                                 |
-|-----------|-----------|-----------------------------------------------------------------------------|
+| ErrorType | HTTP Code | Description                                                                |
+| --------- | --------- | -------------------------------------------------------------------------- |
 | `0`       | 200       | No error.                                                                  |
 | `1`       | 200       | Invalid or missing parameters.                                             |
 | `2`       | 200       | The `CompanyCode` does not exist.                                          |
@@ -160,7 +167,7 @@ The API may return the following error types in the `ServiceResult.ErrorType` fi
 | `7`       | 200       | CukCuk connection is disabled, unable to retrieve data.                    |
 | `100`     | 200       | Internal API error.                                                        |
 | `102`     | 200       | Request rejected due to a concurrent request of the same type.             |
-| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.  |
+| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API. |
 
 ### Handling Errors
 
@@ -175,12 +182,14 @@ async function fetchTablesWithErrorHandling() {
       LoginTime: new Date().toISOString(),
     });
 
-    const branchId = "994C6FE5-DA83-441B-A0E8-57A6FED98FB2";
+    const branchId = "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f";
     const tablesResponse = await client.tables.getByBranch(branchId);
     if (tablesResponse.Success) {
       console.log("Tables:", tablesResponse.Data.ListTable);
     } else {
-      console.error(`Error ${tablesResponse.ErrorType}: ${tablesResponse.ErrorMessage}`);
+      console.error(
+        `Error ${tablesResponse.ErrorType}: ${tablesResponse.ErrorMessage}`
+      );
     }
   } catch (error) {
     if (error.response?.status === 401) {

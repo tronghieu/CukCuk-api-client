@@ -19,7 +19,7 @@ A Node.js/TypeScript library for interacting with the CukCuk OpenPlatform API, d
 Install the package via npm:
 
 ```bash
-npm install cukcuk-api-client
+npm i @luutronghieu/cukcuk-api-client
 ```
 
 ## Prerequisites

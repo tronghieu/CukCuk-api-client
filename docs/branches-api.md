@@ -35,57 +35,58 @@ Before using the Branches APIs, ensure you have:
 
 Each branch in the Branches List API response has the following properties:
 
-| Property        | Type   | Description                                                                 |
-|-----------------|--------|-----------------------------------------------------------------------------|
-| `Id`            | string | Unique identifier (GUID) of the branch.                                     |
-| `Code`          | string | Code of the branch (e.g., `demoquanviet`).                                  |
-| `Name`          | string | Name of the branch (e.g., `Demo Quan Viet`).                                |
-| `IsBaseDepot`   | boolean | Indicates if the branch is the main depot (`true` for main depot).          |
-| `IsChainBranch` | boolean | Indicates if the branch is part of a chain of restaurants (`true` if yes).  |
+| Property        | Type    | Description                                                                |
+| --------------- | ------- | -------------------------------------------------------------------------- |
+| `Id`            | string  | Unique identifier (GUID) of the branch.                                    |
+| `Code`          | string  | Code of the branch (e.g., `demoquanviet`).                                 |
+| `Name`          | string  | Name of the branch (e.g., `Demo Quan Viet`).                               |
+| `IsBaseDepot`   | boolean | Indicates if the branch is the main depot (`true` for main depot).         |
+| `IsChainBranch` | boolean | Indicates if the branch is part of a chain of restaurants (`true` if yes). |
 
 ### BranchSetting Object
 
 The Branch Setting API returns a detailed object with the following properties:
 
-| Property                       | Type    | Description                                                                 |
-|--------------------------------|---------|-----------------------------------------------------------------------------|
-| `Id`                           | string  | Unique identifier (GUID) of the branch.                                     |
-| `Code`                         | string  | Code of the branch (e.g., `demoquanviet`).                                  |
-| `Name`                         | string  | Name of the branch (e.g., `Demo Quan Viet`).                                |
-| `IsBaseDepot`                  | boolean | Indicates if the branch is the main depot (`true` for main depot).          |
-| `Inactive`                     | boolean | Indicates if the branch is inactive (`true` if inactive).                   |
-| `HasVATRate`                   | boolean | `true` if VAT is applied.                                                  |
-| `VATRate`                      | number  | VAT rate (0–100, e.g., `10.0` for 10%).                                    |
-| `VATForDelivery`               | boolean | `true` if VAT applies to delivery orders.                                  |
-| `VATForTakeAway`               | boolean | `true` if VAT applies to take-away orders.                                 |
-| `VATForShip`                   | boolean | `true` if VAT applies to shipping fees.                                    |
-| `CalTaxForService`             | boolean | `true` if tax is calculated for service fees.                              |
-| `HasCalcService`               | boolean | `true` if service fees are applied.                                        |
-| `CalcServiceDelivery`          | boolean | `true` if service fees apply to delivery orders.                           |
-| `CalcServiceTakeAway`          | boolean | `true` if service fees apply to take-away orders.                          |
-| `IsCalcServiceAmountNotPromotion` | boolean | `true` if service fees are calculated on amounts before promotions.         |
-| `HasCalcServiceWhenRequire`    | boolean | `true` if service fees are applied only when required.                     |
-| `HasServiceRate`               | boolean | `true` if service fees are calculated as a percentage of the bill.         |
-| `ServiceRate`                  | number  | Service fee rate (0–100, e.g., `5.0` for 5%).                              |
-| `HasAmountService`             | boolean | `true` if service fees are a fixed amount.                                 |
-| `AmountService`                | number  | Fixed service fee amount (e.g., `0.0`).                                     |
+| Property                          | Type    | Description                                                         |
+| --------------------------------- | ------- | ------------------------------------------------------------------- |
+| `Id`                              | string  | Unique identifier (GUID) of the branch.                             |
+| `Code`                            | string  | Code of the branch (e.g., `demoquanviet`).                          |
+| `Name`                            | string  | Name of the branch (e.g., `Demo Quan Viet`).                        |
+| `IsBaseDepot`                     | boolean | Indicates if the branch is the main depot (`true` for main depot).  |
+| `Inactive`                        | boolean | Indicates if the branch is inactive (`true` if inactive).           |
+| `HasVATRate`                      | boolean | `true` if VAT is applied.                                           |
+| `VATRate`                         | number  | VAT rate (0–100, e.g., `10.0` for 10%).                             |
+| `VATForDelivery`                  | boolean | `true` if VAT applies to delivery orders.                           |
+| `VATForTakeAway`                  | boolean | `true` if VAT applies to take-away orders.                          |
+| `VATForShip`                      | boolean | `true` if VAT applies to shipping fees.                             |
+| `CalTaxForService`                | boolean | `true` if tax is calculated for service fees.                       |
+| `HasCalcService`                  | boolean | `true` if service fees are applied.                                 |
+| `CalcServiceDelivery`             | boolean | `true` if service fees apply to delivery orders.                    |
+| `CalcServiceTakeAway`             | boolean | `true` if service fees apply to take-away orders.                   |
+| `IsCalcServiceAmountNotPromotion` | boolean | `true` if service fees are calculated on amounts before promotions. |
+| `HasCalcServiceWhenRequire`       | boolean | `true` if service fees are applied only when required.              |
+| `HasServiceRate`                  | boolean | `true` if service fees are calculated as a percentage of the bill.  |
+| `ServiceRate`                     | number  | Service fee rate (0–100, e.g., `5.0` for 5%).                       |
+| `HasAmountService`                | boolean | `true` if service fees are a fixed amount.                          |
+| `AmountService`                   | number  | Fixed service fee amount (e.g., `0.0`).                             |
 
 ### ServiceResult Object
 
 Both APIs return responses wrapped in a `ServiceResult` object:
 
-| Property        | Type   | Description                                                                 |
-|-----------------|--------|-----------------------------------------------------------------------------|
-| `Code`          | number | HTTP status code (e.g., `200`, `401`).                                      |
-| `ErrorType`     | number | Error type (see [Error Types](#error-types)).                              |
-| `ErrorMessage`  | string | Detailed error message, if any.                                             |
-| `Success`       | boolean | `true` if the request was successful, `false` otherwise.                   |
-| `Data`          | object | Array of `Branch` objects (Branches List) or a `BranchSetting` object (Branch Setting). |
-| `Total`         | number | Total number of records (used for pagination, typically `0` for these APIs). |
+| Property       | Type    | Description                                                                             |
+| -------------- | ------- | --------------------------------------------------------------------------------------- |
+| `Code`         | number  | HTTP status code (e.g., `200`, `401`).                                                  |
+| `ErrorType`    | number  | Error type (see [Error Types](#error-types)).                                           |
+| `ErrorMessage` | string  | Detailed error message, if any.                                                         |
+| `Success`      | boolean | `true` if the request was successful, `false` otherwise.                                |
+| `Data`         | object  | Array of `Branch` objects (Branches List) or a `BranchSetting` object (Branch Setting). |
+| `Total`        | number  | Total number of records (used for pagination, typically `0` for these APIs).            |
 
 ## Usage
 
 The `CukCukClient` provides methods to interact with both APIs:
+
 - `branches.getAll`: Fetches the list of branches.
 - `branches.getSetting`: Fetches settings for a specific branch.
 
@@ -94,30 +95,30 @@ Below are examples for each.
 ### Example: Fetching All Branches
 
 ```typescript
-import { CukCukClient } from 'cukcuk-api-client';
+import { CukCukClient } from "cukcuk-api-client";
 
 const client = new CukCukClient({
-  appId: 'your-app-id',
-  domain: 'your-domain',
-  secretKey: 'your-secret-key',
-  companyCode: 'your-company-code',
+  appId: "your-app-id",
+  domain: "your-domain",
+  secretKey: "your-secret-key",
+  companyCode: "your-company-code",
 });
 
 async function fetchBranches() {
   try {
     // Authenticate to obtain an access token
     const loginResponse = await client.account.login({
-      domain: 'your-domain',
-      appId: 'your-app-id',
+      domain: "your-domain",
+      appId: "your-app-id",
       loginTime: new Date().toISOString(),
     });
 
     // Fetch branches, including inactive ones
     const branches = await client.branches.getAll({ includeInactive: true });
-    
-    console.log('Branches:', branches.Data);
+
+    console.log("Branches:", branches.Data);
   } catch (error) {
-    console.error('Error fetching branches:', error.message);
+    console.error("Error fetching branches:", error.message);
   }
 }
 
@@ -127,31 +128,31 @@ fetchBranches();
 ### Example: Fetching Branch Settings
 
 ```typescript
-import { CukCukClient } from 'cukcuk-api-client';
+import { CukCukClient } from "cukcuk-api-client";
 
 const client = new CukCukClient({
-  appId: 'your-app-id',
-  domain: 'your-domain',
-  secretKey: 'your-secret-key',
-  companyCode: 'your-company-code',
+  appId: "your-app-id",
+  domain: "your-domain",
+  secretKey: "your-secret-key",
+  companyCode: "your-company-code",
 });
 
 async function fetchBranchSettings() {
   try {
     // Authenticate to obtain an access token
     const loginResponse = await client.account.login({
-      domain: 'your-domain',
-      appId: 'your-app-id',
+      domain: "your-domain",
+      appId: "your-app-id",
       loginTime: new Date().toISOString(),
     });
 
     // Fetch settings for a specific branch
-    const branchId = '994c6fe5-da83-441b-a0e8-57a6fed98fb2';
+    const branchId = "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f";
     const settings = await client.branches.getSetting(branchId);
-    
-    console.log('Branch Settings:', settings.Data);
+
+    console.log("Branch Settings:", settings.Data);
   } catch (error) {
-    console.error('Error fetching branch settings:', error.message);
+    console.error("Error fetching branch settings:", error.message);
   }
 }
 
@@ -162,24 +163,24 @@ fetchBranchSettings();
 
 #### Branches List API (`getAll`)
 
-| Parameter          | Type    | Description                                                  | Required? |
-|--------------------|---------|--------------------------------------------------------------|-----------|
-| `includeInactive`  | boolean | Set - Set to `true` to include inactive branches in the response. | No        |
+| Parameter         | Type    | Description                                                       | Required? |
+| ----------------- | ------- | ----------------------------------------------------------------- | --------- |
+| `includeInactive` | boolean | Set - Set to `true` to include inactive branches in the response. | No        |
 
 #### Branch Setting API (`getSetting`)
 
-| Parameter   | Type   | Description                                                  | Required? |
-|-------------|--------|--------------------------------------------------------------|-----------|
-| `branchId`  | string | The ID (GUID) of the branch, obtained from the Branches List API. | Yes       |
+| Parameter  | Type   | Description                                                       | Required? |
+| ---------- | ------ | ----------------------------------------------------------------- | --------- |
+| `branchId` | string | The ID (GUID) of the branch, obtained from the Branches List API. | Yes       |
 
 ### Headers
 
 Both APIs require the following headers, automatically handled by the `CukCukClient`:
 
-| Header          | Description                                                  | Required? |
-|-----------------|--------------------------------------------------------------|-----------|
-| `Authorization` | Bearer token in the format `Bearer <AccessToken>`.           | Yes       |
-| `CompanyCode`   | The merchant's company code (e.g., `demoquanviet`).          | Yes       |
+| Header          | Description                                         | Required? |
+| --------------- | --------------------------------------------------- | --------- |
+| `Authorization` | Bearer token in the format `Bearer <AccessToken>`.  | Yes       |
+| `CompanyCode`   | The merchant's company code (e.g., `demoquanviet`). | Yes       |
 
 ### Example Responses
 
@@ -190,7 +191,7 @@ Both APIs require the following headers, automatically handled by the `CukCukCli
   "Code": 200,
   "Data": [
     {
-      "Id": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+      "Id": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
       "Code": "demoquanviet",
       "Name": "Demo Quan Viet",
       "IsBaseDepot": false,
@@ -217,7 +218,7 @@ Both APIs require the following headers, automatically handled by the `CukCukCli
 {
   "Code": 200,
   "Data": {
-    "Id": "994c6fe5-da83-441b-a0e8-57a6fed98fb2",
+    "Id": "f7a8b9c2-3d4e-5f67-8901-a23b4c5d6e7f",
     "HasVATRate": true,
     "VATRate": 10.0,
     "VATForDelivery": false,
@@ -249,15 +250,15 @@ Both APIs require the following headers, automatically handled by the `CukCukCli
 
 Both APIs may return the following error types in the `ServiceResult.ErrorType` field:
 
-| ErrorType | HTTP Code | Description                                                                 |
-|-----------|-----------|-----------------------------------------------------------------------------|
-| `0`       | 200       | No error.                                                                  |
+| ErrorType | HTTP Code | Description                                                                          |
+| --------- | --------- | ------------------------------------------------------------------------------------ |
+| `0`       | 200       | No error.                                                                            |
 | `1`       | 200       | Invalid or missing parameters (e.g., `CompanyCode`, `Authorization`, or `branchId`). |
-| `2`       | 200       | The `CompanyCode` does not exist.                                          |
-| `7`       | 200       | CukCuk connection is disabled, unable to retrieve data.                    |
-| `100`     | 200       | Internal API error.                                                        |
-| `102`     | 200       | Request rejected due to a concurrent request of the same type.             |
-| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.  |
+| `2`       | 200       | The `CompanyCode` does not exist.                                                    |
+| `7`       | 200       | CukCuk connection is disabled, unable to retrieve data.                              |
+| `100`     | 200       | Internal API error.                                                                  |
+| `102`     | 200       | Request rejected due to a concurrent request of the same type.                       |
+| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.           |
 
 ### Handling Errors
 
@@ -281,14 +282,14 @@ async function fetchDataWithErrorHandling() {
       return;
     }
 
-    console.log('Branches:', branches.Data);
-    console.log('Settings:', settings.Data);
+    console.log("Branches:", branches.Data);
+    console.log("Settings:", settings.Data);
   } catch (error) {
     if (error.response?.status === 401) {
-      console.error('Authentication failed. Please re-authenticate.');
+      console.error("Authentication failed. Please re-authenticate.");
       // Trigger re-authentication
     } else {
-      console.error('Unexpected error:', error.message);
+      console.error("Unexpected error:", error.message);
     }
   }
 }
