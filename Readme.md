@@ -75,6 +75,7 @@ Detailed guides for connecting to each API endpoint are available in the [docs](
 - [Tables API](./docs/tables-api.markdown)
 - [Orders API](./docs/orders-api.md)
 - [Order Onlines API](./docs/order-onlines-api.md)
+- [SAInvoice API](./docs/sa-invoices-api.markdown)
 - [Table API](./docs/tables-api.markdown)
 
 Refer to these guides for endpoint-specific parameters, response formats, and error handling.

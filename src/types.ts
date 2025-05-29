@@ -393,4 +393,193 @@ export interface CreateOrderOnlineResponse {
   Success: boolean;
   ErrorType?: number;
   ErrorMessage?: string;
-} 
+}
+
+// SAInvoice Types
+export interface InvoicesPagingRequestParam {
+  Page: number;
+  Limit: number;
+  BranchId?: string;
+  HaveCustomer?: boolean;
+  LastSyncDate?: string;
+}
+
+export interface SAInvoiceDetail {
+  RefDetailID: string;
+  RefDetailType: number;
+  RefID: string;
+  ItemID: string;
+  ItemName: string;
+  Quantity: number;
+  UnitPrice: number;
+  UnitID: string;
+  UnitName: string;
+  Amount: number;
+  DiscountRate: number;
+  Description?: string;
+  SortOrder: number;
+  ParentID?: string;
+  InventoryItemAdditionID?: string;
+  InventoryItemType: number;
+  HaveAddition?: boolean;
+  IsSeftPrice: boolean;
+  PromotionRate: number;
+  PromotionType: number;
+  PromotionName?: string;
+  OrderDetailID?: string;
+  IsSelected?: boolean;
+  SAInvoicePromotionAmount: number;
+  RefDate?: string;
+  ItemCode?: string;
+  PromotionAmount: number;
+  InventoryItemCategoryID?: string;
+  AllocationAmount: number;
+  PreTaxAmount: number;
+  TaxRate?: number;
+  TaxAmount?: number;
+  AllocationDeliveryPromotionAmount?: number;
+}
+
+export interface SAInvoicePayment {
+  SAInvoicePaymentID: string;
+  RefID: string;
+  RefNo?: string;
+  PaymentType: number;
+  Amount: number;
+  CustomerID?: string;
+  CustomerName?: string;
+  PaymentName?: string;
+  VoucherID?: string;
+  VoucherQuantity?: number;
+  VoucherAmount?: number;
+  VoucherCode?: string;
+  VoucherName?: string;
+  CardID?: string;
+  CardName?: string;
+  ApplyVoucherType?: number;
+  VoucherAllAmount?: number;
+  VoucherFoodAmount?: number;
+  VoucherDrinkAmount?: number;
+  CardNo?: string;
+  ApprovalCode?: string;
+  CustomerAddress?: string;
+  BankName?: string;
+  BankAccountNumber?: string;
+  CurrencyID?: string;
+  MainCurrency?: string;
+  ExchangeRate?: number;
+  ExchangeAmount?: number;
+  FoodAmount?: number;
+  DrinkAmount?: number;
+}
+
+export interface SAInvoiceCoupon {
+  SAInvoiceCouponID: string;
+  RefID: string;
+  CouponID: string;
+  CouponCode: string;
+  DiscountType: number;
+  DiscountPercent?: number;
+  DiscountAmount?: number;
+  ApplyFromDate?: string;
+  ApplyToDate?: string;
+  ApplyCondition?: string;
+  IsUnlimitedApply?: boolean;
+  ApplyFor?: string;
+  InvoiceDiscountAmount?: number;
+}
+
+export interface SAVATInfo {
+  VATID: string;
+  RefID: string;
+  ReceiverEIvoiceName?: string;
+  Tel?: string;
+  CompanyName?: string;
+  CompanyAddress?: string;
+  TaxCode?: string;
+  Email?: string;
+  Status?: boolean;
+  StatusReleaseEInvoice?: number;
+  EInvoiceNumber?: string;
+  StatusSendEmail?: number;
+  TransactionID?: string;
+  SellerTaxCode?: string;
+  TemplateCode?: string;
+  InvoiceSeries?: string;
+  RefDateReleaseEInvoice?: string;
+  StatusSendToTax?: number;
+  AccountObjectIdentificationNumber?: string;
+  IsCalculatingMachinePublishing?: boolean;
+  ErrorNoteEinvoice?: string;
+}
+
+export interface SAInvoice {
+  RefId: string;
+  RefType?: number;
+  RefNo?: string;
+  RefDate?: string;
+  BranchId?: string;
+  OrderId?: string;
+  OrderType?: number;
+  ShippingDate?: string;
+  ShippingDueDate?: string;
+  CustomerId?: string;
+  CustomerName?: string;
+  CustomerTel?: string;
+  MembershipCardId?: string;
+  EmployeeId?: string;
+  EmployeeName?: string;
+  DeliveryEmployeeId?: string;
+  DeliveryEmployeeName?: string;
+  DeliveryPartnerID?: string;
+  DeliveryPartnerName?: string;
+  WaiterEmployeeId?: string;
+  WaiterEmployeeName?: string;
+  ShippingAddress?: string;
+  PromotionId?: string;
+  PromotionName?: string;
+  TableName?: string;
+  Description?: string;
+  DepositAmount?: number;
+  Amount?: number;
+  DeliveryAmount?: number;
+  ServiceRate?: number;
+  ServiceAmount?: number;
+  VATRate?: number;
+  VATAmount?: number;
+  DiscountAmount?: number;
+  PromotionRate?: number;
+  PromotionAmount?: number;
+  PromotionItemsAmount?: number;
+  ReceiveAmount?: number;
+  ReturnAmount?: number;
+  TotalAmount?: number;
+  SaleAmount?: number;
+  TotalItemAmount?: number;
+  TotalItemAmountAfterTax?: number;
+  TipAmount?: number;
+  ServiceTaxRate?: number;
+  DeliveryTaxRate?: number;
+  CancelDate?: string;
+  CancelBy?: string;
+  CancelReason?: string;
+  PaymentStatus?: number;
+  AvailablePoint?: number;
+  UsedPoint?: number;
+  AddPoint?: number;
+  SAInvoiceDetails?: SAInvoiceDetail[];
+  SAInvoicePayments?: SAInvoicePayment[];
+  SAInvoiceCoupons?: SAInvoiceCoupon[];
+  SAVATInfo?: SAVATInfo;
+}
+
+export interface GetSAInvoicesPagingResponse extends ServiceResult<SAInvoice[]> {}
+
+export interface GetSAInvoiceResponse extends ServiceResult<SAInvoice> {}
+
+export interface GetSAInvoiceDetailResponse extends ServiceResult<{
+  SAInvoiceDetails?: SAInvoiceDetail[];
+  SAInvoicePayments?: SAInvoicePayment[];
+  SAInvoiceCoupons?: SAInvoiceCoupon[];
+  SAVATInfo?: SAVATInfo;
+}> {} 

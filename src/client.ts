@@ -14,6 +14,8 @@ import { CustomersApi } from './customers';
 import { EmployeesApi } from './employees';
 import { InventoryItemsApi } from './inventory-items';
 import { TablesApi } from './tables';
+import { SAInvoicesApi } from './sa-invoices';
+
 export class CukCukClient {
   private readonly client: AxiosInstance;
   private readonly config: ClientConfig;
@@ -120,4 +122,7 @@ export class CukCukClient {
 
   // Tables API
   public tables = new TablesApi(this);
+
+  // SAInvoices API
+  public sainvoices = new SAInvoicesApi(this);
 } 
