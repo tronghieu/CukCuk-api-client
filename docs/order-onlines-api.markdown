@@ -10,7 +10,7 @@ Before using the OrderOnlines API, ensure you have:
 - **Access Token**: Generated via the [Account API](./account-api.md) authentication process.
 - Installed the `cukcuk-api-client` package:
   ```bash
-  npm install cukcuk-api-client
+  npm i @luutronghieu/cukcuk-api-client
   ```
 
 ## API Overview

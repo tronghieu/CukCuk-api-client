@@ -10,59 +10,64 @@ Before using the Customers APIs, ensure you have:
 - **Access Token**: Generated via the [Account API](./account-api.md) authentication process.
 - Installed the `cukcuk-api-client` package:
   ```bash
-  npm install cukcuk-api-client
+  npm i @luutronghieu/cukcuk-api-client
   ```
 
 ## API Overview
 
 ### Customers Create API
+
 - **Endpoint**: `POST https://graphapi.cukcuk.vn/api/v1/customers/`
 - **Purpose**: Adds a new customer to the system.
 - **Version**: 1.1 (includes optional `BranchId`).
 
 ### Customers Paging API
+
 - **Endpoint**: `POST https://graphapi.cukcuk.vn/api/v1/customers/paging`
 - **Purpose**: Retrieves a paginated list of customers.
 - **Max Records**: 100 records per page.
 
 ### Customer Object
+
 Each customer in the response has the following properties:
 
-| Property            | Type   | Description                              |
-|---------------------|--------|------------------------------------------|
-| `Id`                | string | Unique identifier (GUID) of the customer. |
-| `BranchId`          | string | Branch ID (GUID, optional).              |
-| `OriginalBranchId`  | string | Original branch ID (GUID, for partners). |
-| `Code`              | string | Customer code (e.g., `KH000010`).        |
-| `Name`              | string | Customer name (required).                |
-| `CustomerCategoryID`| string | Customer category ID (GUID, optional).   |
-| `CustomerCategoryName` | string | Customer category name (optional).       |
-| `Tel`               | string | Phone number (required).                 |
-| `Address`           | string | Customer address (optional).             |
-| `Email`             | string | Email address (optional).                |
-| `Description`       | string | Customer notes (optional).               |
-| `IdentifyNumber`    | string | ID number (optional).                    |
-| `Birthday`          | string | Birth date (ISO 8601 format, optional).  |
-| `Inactive`          | boolean| `true` if inactive, `false` if active.   |
-| `OldNumberCard`     | string | Old card number (optional).              |
-| `CardStartDate`     | string | Card issuance date (ISO 8601, optional). |
-| `CardExpireDate`    | string | Card expiration date (ISO 8601, optional). |
+| Property               | Type    | Description                                |
+| ---------------------- | ------- | ------------------------------------------ |
+| `Id`                   | string  | Unique identifier (GUID) of the customer.  |
+| `BranchId`             | string  | Branch ID (GUID, optional).                |
+| `OriginalBranchId`     | string  | Original branch ID (GUID, for partners).   |
+| `Code`                 | string  | Customer code (e.g., `KH000010`).          |
+| `Name`                 | string  | Customer name (required).                  |
+| `CustomerCategoryID`   | string  | Customer category ID (GUID, optional).     |
+| `CustomerCategoryName` | string  | Customer category name (optional).         |
+| `Tel`                  | string  | Phone number (required).                   |
+| `Address`              | string  | Customer address (optional).               |
+| `Email`                | string  | Email address (optional).                  |
+| `Description`          | string  | Customer notes (optional).                 |
+| `IdentifyNumber`       | string  | ID number (optional).                      |
+| `Birthday`             | string  | Birth date (ISO 8601 format, optional).    |
+| `Inactive`             | boolean | `true` if inactive, `false` if active.     |
+| `OldNumberCard`        | string  | Old card number (optional).                |
+| `CardStartDate`        | string  | Card issuance date (ISO 8601, optional).   |
+| `CardExpireDate`       | string  | Card expiration date (ISO 8601, optional). |
 
 ### ServiceResult Object
+
 The API returns a `ServiceResult` object:
 
-| Property        | Type   | Description                          |
-|-----------------|--------|--------------------------------------|
-| `Code`          | number | HTTP status code (e.g., `200`, `401`). |
-| `ErrorType`     | number | Error type (see [Error Types](#error-types)). |
-| `ErrorMessage`  | string | Detailed error message, if any.      |
-| `Success`       | boolean| `true` if the request was successful, `false` otherwise. |
-| `Data`          | object | Customer object or array of customers. |
-| `Total`         | number | Total number of records (for paging). |
+| Property       | Type    | Description                                              |
+| -------------- | ------- | -------------------------------------------------------- |
+| `Code`         | number  | HTTP status code (e.g., `200`, `401`).                   |
+| `ErrorType`    | number  | Error type (see [Error Types](#error-types)).            |
+| `ErrorMessage` | string  | Detailed error message, if any.                          |
+| `Success`      | boolean | `true` if the request was successful, `false` otherwise. |
+| `Data`         | object  | Customer object or array of customers.                   |
+| `Total`        | number  | Total number of records (for paging).                    |
 
 ## Usage
 
 The `CukCukClient` provides methods to interact with these APIs:
+
 - `customers.create`: Creates a new customer.
 - `customers.getPaging`: Retrieves a paginated list of customers.
 
@@ -101,7 +106,9 @@ async function createCustomer() {
     if (createdCustomer.Success) {
       console.log("Created Customer:", createdCustomer.Data);
     } else {
-      console.error(`Error ${createdCustomer.ErrorType}: ${createdCustomer.ErrorMessage}`);
+      console.error(
+        `Error ${createdCustomer.ErrorType}: ${createdCustomer.ErrorMessage}`
+      );
     }
   } catch (error) {
     console.error("Error creating customer:", error.message);
@@ -156,44 +163,45 @@ fetchCustomers();
 
 #### Customers Create API (`create`)
 
-| Parameter         | Type   | Description                              | Required? |
-|-------------------|--------|------------------------------------------|-----------|
-| `Code`            | string | Customer code (optional, auto-generated if empty). | No        |
-| `Name`            | string | Customer name (required).                | Yes       |
-| `Tel`             | string | Phone number (required, must be unique). | Yes       |
-| `Address`         | string | Customer address (optional).             | No        |
-| `Email`           | string | Email address (optional).                | No        |
-| `Description`     | string | Customer notes (optional).               | No        |
-| `IdentifyNumber`  | string | ID number (optional).                    | No        |
-| `Birthday`        | string | Birth date (ISO 8601, optional).         | No        |
-| `Inactive`        | boolean| Inactive status (`false` by default).    | No        |
-| `OldNumberCard`   | string | Old card number (optional).              | No        |
-| `CardStartDate`   | string | Card issuance date (ISO 8601, optional). | No        |
-| `CardExpireDate`  | string | Card expiration date (ISO 8601, optional). | No       |
-| `BranchId`        | string | Branch ID (GUID, optional, version 1.1). | No        |
-| `OriginalBranchId`| string | Original branch ID (GUID, optional).     | No        |
+| Parameter          | Type    | Description                                        | Required? |
+| ------------------ | ------- | -------------------------------------------------- | --------- |
+| `Code`             | string  | Customer code (optional, auto-generated if empty). | No        |
+| `Name`             | string  | Customer name (required).                          | Yes       |
+| `Tel`              | string  | Phone number (required, must be unique).           | Yes       |
+| `Address`          | string  | Customer address (optional).                       | No        |
+| `Email`            | string  | Email address (optional).                          | No        |
+| `Description`      | string  | Customer notes (optional).                         | No        |
+| `IdentifyNumber`   | string  | ID number (optional).                              | No        |
+| `Birthday`         | string  | Birth date (ISO 8601, optional).                   | No        |
+| `Inactive`         | boolean | Inactive status (`false` by default).              | No        |
+| `OldNumberCard`    | string  | Old card number (optional).                        | No        |
+| `CardStartDate`    | string  | Card issuance date (ISO 8601, optional).           | No        |
+| `CardExpireDate`   | string  | Card expiration date (ISO 8601, optional).         | No        |
+| `BranchId`         | string  | Branch ID (GUID, optional, version 1.1).           | No        |
+| `OriginalBranchId` | string  | Original branch ID (GUID, optional).               | No        |
 
 #### Customers Paging API (`getPaging`)
 
-| Parameter         | Type    | Description                              | Required? |
-|-------------------|---------|------------------------------------------|-----------|
-| `Page`            | number  | Page number to retrieve (default: 1).    | Yes       |
-| `Limit`           | number  | Number of records per page (max 100).    | Yes       |
-| `IncludeInactive` | boolean | `true` to include inactive customers.    | No        |
-| `LastSyncDate`    | string  | Last synchronization date (ISO 8601).    | No        |
+| Parameter         | Type    | Description                           | Required? |
+| ----------------- | ------- | ------------------------------------- | --------- |
+| `Page`            | number  | Page number to retrieve (default: 1). | Yes       |
+| `Limit`           | number  | Number of records per page (max 100). | Yes       |
+| `IncludeInactive` | boolean | `true` to include inactive customers. | No        |
+| `LastSyncDate`    | string  | Last synchronization date (ISO 8601). | No        |
 
 ### Headers
 
 All APIs require the following headers, automatically handled by the `CukCukClient`:
 
-| Header          | Description                          | Required? |
-|-----------------|--------------------------------------|-----------|
-| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`). | Yes       |
+| Header          | Description                                   | Required? |
+| --------------- | --------------------------------------------- | --------- |
+| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`).  | Yes       |
 | `CompanyCode`   | Merchant company code (e.g., `demoquanviet`). | Yes       |
 
 ### Example Responses
 
 #### Customers Create API (Success)
+
 ```json
 {
   "Code": 200,
@@ -215,6 +223,7 @@ All APIs require the following headers, automatically handled by the `CukCukClie
 ```
 
 #### Customers Create API (Duplicate Error)
+
 ```json
 {
   "Code": 200,
@@ -237,6 +246,7 @@ All APIs require the following headers, automatically handled by the `CukCukClie
 ```
 
 #### Customers Paging API
+
 ```json
 {
   "Code": 200,
@@ -262,8 +272,8 @@ All APIs require the following headers, automatically handled by the `CukCukClie
 
 The APIs may return the following error types in the `ServiceResult.ErrorType` field:
 
-| ErrorType | HTTP Code | Description                                                                 |
-|-----------|-----------|-----------------------------------------------------------------------------|
+| ErrorType | HTTP Code | Description                                                                |
+| --------- | --------- | -------------------------------------------------------------------------- |
 | `0`       | 200       | No error.                                                                  |
 | `1`       | 200       | Invalid or missing parameters.                                             |
 | `2`       | 200       | The `CompanyCode` does not exist.                                          |
@@ -273,7 +283,7 @@ The APIs may return the following error types in the `ServiceResult.ErrorType` f
 | `100`     | 200       | Internal API error.                                                        |
 | `102`     | 200       | Request rejected due to a concurrent request of the same type.             |
 | `200`     | 200       | Customer code or phone number already exists (Customers Create only).      |
-| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.  |
+| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API. |
 
 ### Handling Errors
 

@@ -70,10 +70,12 @@ Detailed guides for connecting to each API endpoint are available in the [docs](
 - [Branches API](./docs/branches-api.md)
 - [Categories API](./docs/categories-api.md)
 - [Customers API](./docs/customers-api.markdown)
+- [Employees API](./docs/employees-api.markdown)
 - [Inventory Items API](./docs/inventory-items-api.markdown)
 - [Tables API](./docs/tables-api.markdown)
 - [Orders API](./docs/orders-api.md)
 - [Order Onlines API](./docs/order-onlines-api.md)
+- [Table API](./docs/tables-api.markdown)
 
 Refer to these guides for endpoint-specific parameters, response formats, and error handling.
 

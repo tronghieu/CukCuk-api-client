@@ -10,44 +10,48 @@ Before using the Categories API, ensure you have:
 - **Access Token**: Generated via the [Account API](./account-api.md) authentication process.
 - Installed the `cukcuk-api-client` package:
   ```bash
-  npm install cukcuk-api-client
+  npm i @luutronghieu/cukcuk-api-client
   ```
 
 ## API Overview
 
 ### Categories List API
+
 - **Endpoint**: `GET https://graphapi.cukcuk.vn/api/v1/categories/list?includeInactive={true|false}`
 - **Purpose**: Retrieves a flat list of menu categories.
 - **Authentication**: Requires `Authorization` and `CompanyCode` headers.
 
 ### InventoryItemCategory Object
+
 Each category in the response has the following properties:
 
-| Property      | Type   | Description                                                  |
-|---------------|--------|--------------------------------------------------------------|
-| `Id`          | string | Unique identifier (GUID) of the category.                    |
-| `Code`        | string | Code of the category (e.g., `COMSUAT`).                      |
-| `Name`        | string | Name of the category (e.g., `Cơm suất`).                     |
-| `Description` | string | Description of the category (e.g., `Cơm`).                   |
-| `IsLeaf`      | boolean| `true` if the category is a leaf node, `false` if it's a parent. |
-| `Grade`       | number | Hierarchy level of the category (1 to 9, e.g., `1` for top-level). |
-| `Inactive`    | boolean| `true` if the category is inactive, `false` if active.       |
+| Property      | Type    | Description                                                        |
+| ------------- | ------- | ------------------------------------------------------------------ |
+| `Id`          | string  | Unique identifier (GUID) of the category.                          |
+| `Code`        | string  | Code of the category (e.g., `COMSUAT`).                            |
+| `Name`        | string  | Name of the category (e.g., `Cơm suất`).                           |
+| `Description` | string  | Description of the category (e.g., `Cơm`).                         |
+| `IsLeaf`      | boolean | `true` if the category is a leaf node, `false` if it's a parent.   |
+| `Grade`       | number  | Hierarchy level of the category (1 to 9, e.g., `1` for top-level). |
+| `Inactive`    | boolean | `true` if the category is inactive, `false` if active.             |
 
 ### ServiceResult Object
+
 The API returns a `ServiceResult` object:
 
-| Property        | Type   | Description                                                  |
-|-----------------|--------|--------------------------------------------------------------|
-| `Code`          | number | HTTP status code (e.g., `200`, `401`).                       |
-| `ErrorType`     | number | Error type (see [Error Types](#error-types)).               |
-| `ErrorMessage`  | string | Detailed error message, if any.                              |
-| `Success`       | boolean| `true` if the request was successful, `false` otherwise.    |
-| `Data`          | object | Array of `InventoryItemCategory` objects.                    |
-| `Total`         | number | Total number of records (typically `0` for this API).        |
+| Property       | Type    | Description                                              |
+| -------------- | ------- | -------------------------------------------------------- |
+| `Code`         | number  | HTTP status code (e.g., `200`, `401`).                   |
+| `ErrorType`    | number  | Error type (see [Error Types](#error-types)).            |
+| `ErrorMessage` | string  | Detailed error message, if any.                          |
+| `Success`      | boolean | `true` if the request was successful, `false` otherwise. |
+| `Data`         | object  | Array of `InventoryItemCategory` objects.                |
+| `Total`        | number  | Total number of records (typically `0` for this API).    |
 
 ## Usage
 
 The `CukCukClient` provides a method to interact with the Categories API:
+
 - `categories.getList`: Fetches the list of categories.
 
 Below is an example of how to use it.
@@ -71,7 +75,9 @@ async function fetchCategories() {
     });
 
     // Fetch categories, including inactive ones
-    const categories = await client.categories.getList({ includeInactive: true });
+    const categories = await client.categories.getList({
+      includeInactive: true,
+    });
     console.log("Categories:", categories.Data);
   } catch (error) {
     console.error("Error fetching categories:", error.message);
@@ -85,17 +91,17 @@ fetchCategories();
 
 #### Categories List API (`getList`)
 
-| Parameter         | Type    | Description                                       | Required? |
-|-------------------|---------|---------------------------------------------------|-----------|
-| `includeInactive` | boolean | Set to `true` to include inactive categories.    | No        |
+| Parameter         | Type    | Description                                   | Required? |
+| ----------------- | ------- | --------------------------------------------- | --------- |
+| `includeInactive` | boolean | Set to `true` to include inactive categories. | No        |
 
 ### Headers
 
 The API requires the following headers, automatically handled by the `CukCukClient`:
 
-| Header          | Description                          | Required? |
-|-----------------|--------------------------------------|-----------|
-| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`). | Yes       |
+| Header          | Description                                   | Required? |
+| --------------- | --------------------------------------------- | --------- |
+| `Authorization` | Bearer token (e.g., `Bearer <AccessToken>`).  | Yes       |
 | `CompanyCode`   | Merchant company code (e.g., `demoquanviet`). | Yes       |
 
 ### Example Response
@@ -132,14 +138,14 @@ The API requires the following headers, automatically handled by the `CukCukClie
 
 The API may return the following error types in the `ServiceResult.ErrorType` field:
 
-| ErrorType | HTTP Code | Description                                                                 |
-|-----------|-----------|-----------------------------------------------------------------------------|
+| ErrorType | HTTP Code | Description                                                                |
+| --------- | --------- | -------------------------------------------------------------------------- |
 | `0`       | 200       | No error.                                                                  |
 | `2`       | 200       | The `CompanyCode` does not exist.                                          |
 | `7`       | 200       | CukCuk connection is disabled, unable to retrieve data.                    |
 | `100`     | 200       | Internal API error.                                                        |
 | `102`     | 200       | Request rejected due to a concurrent request of the same type.             |
-| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API.  |
+| `-`       | 401       | Access token is expired or invalid; re-authenticate using the Account API. |
 
 ### Handling Errors
 
@@ -154,9 +160,13 @@ async function fetchCategoriesWithErrorHandling() {
       LoginTime: new Date().toISOString(),
     });
 
-    const categories = await client.categories.getList({ includeInactive: true });
+    const categories = await client.categories.getList({
+      includeInactive: true,
+    });
     if (!categories.Success) {
-      console.error(`Error ${categories.ErrorType}: ${categories.ErrorMessage}`);
+      console.error(
+        `Error ${categories.ErrorType}: ${categories.ErrorMessage}`
+      );
       return;
     }
 
