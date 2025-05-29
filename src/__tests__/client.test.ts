@@ -73,7 +73,7 @@ describe('CukCukClient', () => {
         url: '/test'
       });
 
-      expect(result).toEqual({ test: 'data' });
+      expect(result).toEqual(mockResponse);
     });
 
     it('should handle API errors', async () => {
@@ -93,11 +93,7 @@ describe('CukCukClient', () => {
       await expect(client.makeRequest({
         method: 'GET',
         url: '/test'
-      })).rejects.toEqual({
-        code: '400',
-        message: 'Bad Request',
-        details: { error: 'Invalid input' }
-      });
+      })).rejects.toEqual(mockError);
     });
   });
 }); 
